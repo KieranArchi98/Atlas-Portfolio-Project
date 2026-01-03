@@ -63,8 +63,8 @@ export default function HomePage() {
       <SystemCTA
         title="Ready to Build Your Brand?"
         description="Join thousands of professionals who trust Atlas to power their digital presence."
-        primaryAction={{ label: 'Start Free Trial', href: '/signup' }}
-        secondaryAction={{ label: 'Contact Sales', href: '/contact' }}
+        primaryAction={{ label: 'Join Now', href: '/signup' }}
+        secondaryAction={{ label: 'Learn More', href: '/contact' }}
       />
     </div>
   );

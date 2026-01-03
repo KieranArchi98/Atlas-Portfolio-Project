@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from 'framer-motion';
-import { Card } from '../ui/Card';
 import { Icon, IconName } from '../ui/Icon';
 import { FeatureVisual } from './FeatureVisuals';
 
@@ -31,7 +30,7 @@ export function FeatureGrid({ title, features, columns = 3 }: FeatureGridProps) 
     };
 
     return (
-        <section className="py-24 relative overflow-hidden bg-background-primary">
+        <section className="pt-48 pb-32 relative overflow-hidden bg-background-primary">
             {/* Top Divider */}
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[90%] h-px bg-gradient-to-r from-transparent via-border-default to-transparent opacity-20 z-30" />
 
@@ -59,28 +58,19 @@ export function FeatureGrid({ title, features, columns = 3 }: FeatureGridProps) 
                             transition={{ delay: idx * 0.1 }}
                             className="group"
                         >
-                            <Card
-                                variant="bordered"
-                                className="relative flex flex-col h-full gap-6 p-8 overflow-hidden bg-background-muted/30 border border-border-default/30 hover:border-brand-primary/30 transition-all duration-500 hover:shadow-xl hover:shadow-brand-primary/5 hover:-translate-y-1"
-                            >
-                                {/* Gradient accent line */}
-                                <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-brand-primary/0 via-brand-primary/50 to-brand-primary/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                            <div className="relative flex flex-col h-full gap-6 p-4 md:p-8 overflow-visible">
+                                {/* Vertical Divider (Right side for items 0 and 1 on desktop) */}
+                                {idx !== features.length - 1 && (
+                                    <div className="absolute top-8 bottom-8 right-0 w-px bg-border-default/40 hidden md:block" />
+                                )}
 
-                                {/* Subtle grid pattern */}
-                                <div className="absolute inset-0 opacity-[0.02] pointer-events-none"
-                                    style={{
-                                        backgroundImage: `linear-gradient(0deg, transparent 24%, rgba(37, 99, 235, 0.05) 25%, rgba(37, 99, 235, 0.05) 26%, transparent 27%, transparent 74%, rgba(37, 99, 235, 0.05) 75%, rgba(37, 99, 235, 0.05) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(37, 99, 235, 0.05) 25%, rgba(37, 99, 235, 0.05) 26%, transparent 27%, transparent 74%, rgba(37, 99, 235, 0.05) 75%, rgba(37, 99, 235, 0.05) 76%, transparent 77%, transparent)`,
-                                        backgroundSize: '20px 20px'
-                                    }}
-                                />
-
-                                {/* Index number */}
-                                <div className="absolute top-6 right-6 font-mono text-5xl font-bold text-brand-primary/[0.06] group-hover:text-brand-primary/[0.12] transition-colors duration-500">
+                                {/* Index number (Subtler) */}
+                                <div className="absolute -top-4 left-4 font-mono text-8xl font-bold text-foreground-primary/[0.03] pointer-events-none select-none">
                                     {String(idx + 1).padStart(2, '0')}
                                 </div>
 
                                 {feature.imageUrl || feature.variant ? (
-                                    <div className="relative w-full h-48 mb-6 rounded-2xl overflow-visible group-hover:scale-105 transition-transform duration-500">
+                                    <div className="relative w-full h-48 mb-6 rounded-2xl overflow-visible group-hover:scale-105 transition-transform duration-500 z-10">
                                         {feature.imageUrl ? (
                                             <img
                                                 src={feature.imageUrl}
@@ -94,29 +84,23 @@ export function FeatureGrid({ title, features, columns = 3 }: FeatureGridProps) 
                                 ) : (
                                     /* Icon with gradient background */
                                     <motion.div
-                                        className="relative w-16 h-16 rounded-2xl bg-gradient-to-br from-brand-primary/20 to-brand-primary/5 flex items-center justify-center text-brand-primary shadow-lg shadow-brand-primary/10 group-hover:shadow-brand-primary/20 transition-all duration-500"
+                                        className="relative w-16 h-16 rounded-2xl bg-surface-secondary flex items-center justify-center text-foreground-primary shadow-sm mb-6 z-10"
                                         whileHover={{ scale: 1.05, rotate: 5 }}
-                                        transition={{ type: "spring", stiffness: 400, damping: 10 }}
                                     >
-                                        {/* Glow effect */}
-                                        <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-brand-primary/30 to-transparent opacity-0 group-hover:opacity-100 blur-md transition-opacity duration-500" />
-                                        <Icon name={feature.icon} size={28} className="relative z-10" />
+                                        <Icon name={feature.icon} size={28} />
                                     </motion.div>
                                 )}
 
                                 {/* Content */}
-                                <div className="space-y-3 relative z-10">
-                                    <h3 className="text-2xl font-bold text-foreground-primary group-hover:text-brand-primary transition-colors duration-300">
+                                <div className="space-y-4 relative z-10 text-center md:text-left">
+                                    <h3 className="text-2xl md:text-3xl font-bold text-foreground-primary">
                                         {feature.title}
                                     </h3>
-                                    <p className="text-foreground-secondary leading-relaxed opacity-80">
+                                    <p className="text-foreground-secondary leading-relaxed opacity-80 text-lg">
                                         {feature.description}
                                     </p>
                                 </div>
-
-                                {/* Bottom accent bar */}
-                                <div className="absolute bottom-0 left-8 right-8 h-[1px] bg-gradient-to-r from-transparent via-brand-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                            </Card>
+                            </div>
                         </motion.div>
                     ))}
                 </div>

@@ -25,6 +25,8 @@ import {
     GithubIcon,
     DribbbleIcon,
     Linkedin01Icon,
+    Database01Icon,
+    Globe02Icon,
 } from 'hugeicons-react';
 
 /* 
@@ -60,6 +62,8 @@ export const ICONS = {
     github: GithubIcon,
     dribbble: DribbbleIcon,
     linkedin: Linkedin01Icon,
+    server: Database01Icon, // Using Database icon for server context
+    globe: Globe02Icon,
 };
 
 export type IconName = keyof typeof ICONS;

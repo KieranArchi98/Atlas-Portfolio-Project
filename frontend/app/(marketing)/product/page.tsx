@@ -9,9 +9,9 @@ export default function ProductPage() {
   return (
     <div className="bg-background-primary flex flex-col gap-0">
       <ProductHero
-        sectionTag="SERVICE: PORTFOLIO_OVERVIEW"
-        title="Software Development & Technical Support"
-        description="Comprehensive technical solutions for modern infrastructure. Providing high-performance software engineering, specialized tech support, and systematic digital maintenance for professionals."
+        sectionTag="SYSTEM_STATUS: ONLINE"
+        title="Systems & Software Engineering"
+        description="Expert technical diagnostics, robust network infrastructure, and full-stack software solutions. Comprehensive system administration for modern enterprises."
       />
 
       {/* Metrics Section - White Theme */}

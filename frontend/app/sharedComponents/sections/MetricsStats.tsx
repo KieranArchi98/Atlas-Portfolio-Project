@@ -59,7 +59,7 @@ function AnimatedCounter({ value, prefix = "", suffix = "" }: { value: number; p
     const ref = useRef<HTMLSpanElement>(null);
     const motionValue = useMotionValue(0);
     const springValue = useSpring(motionValue, { damping: 50, stiffness: 100 });
-    const isInView = useInView(ref, { once: true, margin: "0px" });
+    const isInView = useInView(ref, { once: true, margin: "-100px" });
 
     useEffect(() => {
         if (isInView) {
@@ -90,7 +90,7 @@ export function MetricsStats({ metrics = DEFAULT_METRICS, variant = 'default' }:
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
+                    viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.8 }}
                     className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8"
                 >

@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '../ui/Button';
-import { ParticleBackground } from '../effects/ParticleBackground';
+import { Hero3DBackground } from '../effects/Hero3DBackground';
 
 interface InteractiveHeroProps {
     titlePrefix: string;
@@ -79,44 +79,8 @@ export function InteractiveHero({
             className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-background-primary"
             onMouseMove={handleMouseMove}
         >
-            {/* Particle Background */}
-            <ParticleBackground />
-
-            {/* Animated gradient orbs */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                <motion.div
-                    className="absolute w-96 h-96 bg-brand-primary/20 rounded-full blur-3xl"
-                    animate={{
-                        x: [0, 100, 0],
-                        y: [0, 50, 0],
-                    }}
-                    transition={{
-                        duration: 20,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                    }}
-                    style={{
-                        left: '10%',
-                        top: '20%',
-                    }}
-                />
-                <motion.div
-                    className="absolute w-96 h-96 bg-brand-secondary/20 rounded-full blur-3xl"
-                    animate={{
-                        x: [0, -100, 0],
-                        y: [0, -50, 0],
-                    }}
-                    transition={{
-                        duration: 15,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                    }}
-                    style={{
-                        right: '10%',
-                        bottom: '20%',
-                    }}
-                />
-            </div>
+            {/* 3D WebGL Background */}
+            <Hero3DBackground />
 
             {/* Content */}
             <div className="w-full md:w-[95%] lg:w-[90%] xl:w-[85%] 2xl:w-[80%] mx-auto px-4 md:px-6 relative z-10">

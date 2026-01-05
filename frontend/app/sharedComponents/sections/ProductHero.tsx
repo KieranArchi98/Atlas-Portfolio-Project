@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { Icon } from '../ui/Icon';
 import { useState, useEffect } from 'react';
+import { ProductHeroBackground } from '../effects/ProductHeroBackground';
 
 interface ProductHeroProps {
     sectionTag?: string;
@@ -44,8 +45,10 @@ export function ProductHero({
         <section className="relative min-h-[75vh] flex items-center bg-background-primary overflow-hidden border-b border-border-default">
             {/* --- Background Elements --- */}
 
-            {/* Diagonal Slice Overlay */}
-            <div className="absolute right-0 top-0 w-1/2 h-full bg-gradient-to-l from-brand-primary/5 to-transparent skew-x-12 z-0 pointer-events-none" />
+            {/* WebGL Data Particles */}
+            <ProductHeroBackground />
+
+
 
 
             <div className="container mx-auto px-6 relative z-10 w-[90%] xl:w-[85%]">

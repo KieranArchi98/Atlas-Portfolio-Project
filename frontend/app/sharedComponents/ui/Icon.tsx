@@ -12,6 +12,13 @@ import {
     Cancel01Icon,
     ViewIcon,
     ViewOffIcon,
+    CodeIcon,
+    Image01Icon,
+    GithubIcon,
+    DribbbleIcon,
+    Linkedin01Icon,
+    Database01Icon,
+    Globe02Icon,
     PackageIcon,
     Money03Icon,
     BookOpen01Icon,
@@ -20,13 +27,8 @@ import {
     File01Icon,
     Download01Icon,
     PlayCircle02Icon,
-    CodeIcon,
-    Image01Icon,
-    GithubIcon,
-    DribbbleIcon,
-    Linkedin01Icon,
-    Database01Icon,
-    Globe02Icon,
+    ArrowLeft01Icon as ChevronLeftIcon,
+    ArrowRight01Icon as ChevronRightIcon,
 } from 'hugeicons-react';
 
 /* 
@@ -64,6 +66,8 @@ export const ICONS = {
     linkedin: Linkedin01Icon,
     server: Database01Icon, // Using Database icon for server context
     globe: Globe02Icon,
+    "chevron-left": ChevronLeftIcon,
+    "chevron-right": ChevronRightIcon,
 };
 
 export type IconName = keyof typeof ICONS;

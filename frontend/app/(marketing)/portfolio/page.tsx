@@ -3,8 +3,9 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Icon } from '@/app/sharedComponents/ui/Icon';
 import { Button } from '@/app/sharedComponents/ui/Button';
-import { Card } from '@/app/sharedComponents/ui/Card';
 import { AnimatedRitualIcon } from '@/app/sharedComponents/ui/AnimatedRitualIcon';
+import { PortfolioBackground } from '@/app/sharedComponents/effects/PortfolioBackground';
+import { ProjectCard3D } from '@/app/sharedComponents/ui/ProjectCard3D';
 
 interface Project {
     id: string;
@@ -71,6 +72,33 @@ const projects: Project[] = [
         image: '/placeholder-project.jpg',
         technologies: ['Next.js', 'PostgreSQL', 'Prisma', 'Auth.js'],
         githubUrl: 'https://github.com/KieranArchi98/Harbor',
+    },
+    {
+        id: 'packet-tracer',
+        name: 'Enterprise Network Setup',
+        description: 'Complex Cisco Packet Tracer topology',
+        longDescription: 'A high-fidelity enterprise network simulation featuring multi-area OSPF routing, VLAN segmentation, EtherChannel, and secure Site-to-Site VPN tunnels for multi-branch connectivity.',
+        image: '/projects/packet-tracer.png',
+        technologies: ['Cisco Packet Tracer', 'OSPF', 'VLANs', 'VPN'],
+        githubUrl: 'https://github.com/KieranArchi98/Network-Architectures',
+    },
+    {
+        id: 'ad-dc-environment',
+        name: 'Corporate AD/DC Environment',
+        description: 'Windows Server infrastructure implementation',
+        longDescription: 'A production-grade Active Directory Domain Controller setup. Includes complex Group Policy Objects (GPOs), automated user onboarding via PowerShell, and highly available DNS/DHCP services.',
+        image: '/projects/ad-dc.png',
+        technologies: ['Windows Server', 'Active Directory', 'GPO', 'DNS/DHCP'],
+        githubUrl: 'https://github.com/KieranArchi98/Enterprise-Infrastructure',
+    },
+    {
+        id: 'project-x',
+        name: 'Project X',
+        description: 'Experimental system interoperability research',
+        longDescription: 'A high-stability research project focused on cross-platform system interoperability and advanced cryptographic task handling. Explores state-of-the-art data integrity verification methods.',
+        image: '/projects/project-x.png',
+        technologies: ['Cryptography', 'Rust', 'System Interaction', 'Low-level API'],
+        githubUrl: 'https://github.com/KieranArchi98/Project-X',
     }
 ];
 
@@ -78,73 +106,36 @@ export default function PortfolioPage() {
     const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
     return (
-        <div className="pt-10 pb-20 lg:pt-14 lg:pb-28 relative overflow-hidden bg-background-primary">
-            <div className="w-full md:w-[95%] lg:w-[90%] xl:w-[85%] 2xl:w-[80%] mx-auto px-4 md:px-6 relative z-10">
-                {/* Header */}
-                <div className="flex flex-col items-center mb-16 space-y-8 w-full">
-                    <div className="flex flex-col items-center justify-center gap-6 w-full">
-                        <AnimatedRitualIcon
-                            name="projects"
-                            size={64}
-                        />
-                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground-primary tracking-tighter uppercase font-mono">
-                            Portfolio
-                        </h1>
-                    </div>
-                    <p className="text-base md:text-lg lg:text-xl font-mono opacity-60 w-full text-center lowercase tracking-tight">
-                        A systematic collection of architectural solutions and engineering prototypes.
-                    </p>
-                </div>
+        <div className="relative min-h-screen pt-0 pb-10 overflow-hidden bg-background-primary">
+            {/* Background Effect */}
+            <PortfolioBackground />
 
+            <div className="w-full md:w-[95%] lg:w-[90%] xl:w-[85%] 2xl:w-[80%] mx-auto px-4 md:px-6 relative z-10 pt-10">
                 {/* Projects Grid */}
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {projects.map((project, index) => (
-                        <motion.div
-                            key={project.id}
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: index * 0.1 }}
-                        >
-                            <Card
-                                variant="bordered"
-                                className="group cursor-pointer hover:shadow-xl transition-all duration-300 hover:-translate-y-2 overflow-hidden"
-                                onClick={() => setSelectedProject(project)}
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 p-4">
+                    {projects.map((project, index) => {
+                        const isLast = index === projects.length - 1;
+                        const isSoloMd = isLast && projects.length % 2 !== 0;
+                        const isSoloLg = isLast && projects.length % 3 === 1;
+
+                        return (
+                            <div
+                                key={project.id}
+                                className={`
+                                    ${isSoloMd ? 'md:col-span-2 md:flex md:justify-center' : 'md:col-span-1'}
+                                    ${isSoloLg ? 'lg:col-span-3 lg:flex lg:justify-center' : 'lg:col-span-1'}
+                                `}
                             >
-                                {/* Project Image Placeholder */}
-                                <div className="w-full h-48 bg-gradient-to-br from-brand-primary/20 to-brand-primary/5 flex items-center justify-center relative overflow-hidden">
-                                    <Icon name="code" size={48} className="text-brand-primary/40" />
-                                    <div className="absolute inset-0 bg-brand-primary/0 group-hover:bg-brand-primary/10 transition-colors" />
+                                <div className={`w-full ${isSoloMd ? 'md:w-1/2 lg:w-full' : ''} ${isSoloLg ? 'lg:w-1/3' : ''}`}>
+                                    <ProjectCard3D
+                                        project={project}
+                                        index={index}
+                                        onClick={() => setSelectedProject(project)}
+                                    />
                                 </div>
-
-                                <div className="p-6 space-y-4">
-                                    <div>
-                                        <h3 className="text-xl font-bold text-foreground-primary mb-2 group-hover:text-brand-primary transition-colors">
-                                            {project.name}
-                                        </h3>
-                                        <p className="text-foreground-secondary text-sm leading-relaxed">
-                                            {project.description}
-                                        </p>
-                                    </div>
-
-                                    <div className="flex flex-wrap gap-2">
-                                        {project.technologies.slice(0, 3).map((tech) => (
-                                            <span
-                                                key={tech}
-                                                className="px-3 py-1 bg-brand-primary/10 text-brand-primary text-xs font-medium rounded-full"
-                                            >
-                                                {tech}
-                                            </span>
-                                        ))}
-                                        {project.technologies.length > 3 && (
-                                            <span className="px-3 py-1 bg-background-muted text-foreground-muted text-xs font-medium rounded-full">
-                                                +{project.technologies.length - 3}
-                                            </span>
-                                        )}
-                                    </div>
-                                </div>
-                            </Card>
-                        </motion.div>
-                    ))}
+                            </div>
+                        );
+                    })}
                 </div>
             </div>
 
@@ -158,90 +149,88 @@ export default function PortfolioPage() {
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                             onClick={() => setSelectedProject(null)}
-                            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50"
+                            className="fixed inset-0 bg-background-primary/90 backdrop-blur-lg z-50"
                         />
 
                         {/* Modal */}
                         <motion.div
-                            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                            layoutId={`project-${selectedProject.id}`}
+                            initial={{ opacity: 0, scale: 0.9, y: 50 }}
                             animate={{ opacity: 1, scale: 1, y: 0 }}
-                            exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                            className="fixed inset-0 z-50 flex items-center justify-center p-4"
-                            onClick={() => setSelectedProject(null)}
+                            exit={{ opacity: 0, scale: 0.9, y: 50 }}
+                            className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none"
                         >
                             <div
-                                onClick={(e) => e.stopPropagation()}
-                                className="bg-background-primary rounded-2xl shadow-2xl w-[95%] md:w-[90%] lg:w-[85%] xl:w-[75%] 2xl:w-[65%] max-h-[90vh] overflow-y-auto"
+                                className="bg-background-primary border border-brand-primary/20 rounded-2xl shadow-2xl w-[95%] md:w-[90%] lg:w-[85%] xl:w-[75%] 2xl:w-[65%] max-h-[90vh] overflow-y-auto pointer-events-auto relative"
                             >
-                                {/* Modal Header */}
-                                <div className="sticky top-0 bg-background-primary border-b border-border-default p-6 flex items-center justify-between">
-                                    <h2 className="text-2xl font-bold text-foreground-primary">
-                                        {selectedProject.name}
-                                    </h2>
-                                    <button
-                                        onClick={() => setSelectedProject(null)}
-                                        className="p-2 hover:bg-background-muted rounded-lg transition-colors"
-                                    >
-                                        <Icon name="close" size={24} />
-                                    </button>
-                                </div>
+                                {/* Modal Header / Close */}
+                                <button
+                                    onClick={() => setSelectedProject(null)}
+                                    className="absolute top-4 right-4 p-2 bg-background-primary/50 hover:bg-brand-primary/20 text-foreground-primary rounded-full transition-colors z-20"
+                                >
+                                    <Icon name="close" size={24} />
+                                </button>
 
-                                {/* Modal Content */}
-                                <div className="p-6 space-y-6">
-                                    {/* Image */}
-                                    <div className="w-full h-64 bg-gradient-to-br from-brand-primary/20 to-brand-primary/5 rounded-xl flex items-center justify-center">
-                                        <Icon name="code" size={64} className="text-brand-primary/40" />
+                                <div className="grid grid-cols-1 lg:grid-cols-2 h-full">
+                                    {/* Left: Visual */}
+                                    <div className="relative h-64 lg:h-auto bg-gradient-to-br from-brand-primary/10 to-background-primary flex items-center justify-center overflow-hidden border-b lg:border-b-0 lg:border-r border-border-default">
+                                        <div className="absolute inset-0 opacity-30 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-brand-primary/20 via-transparent to-transparent" />
+                                        <Icon name="code" size={120} className="text-brand-primary/20 relative z-10" />
                                     </div>
 
-                                    {/* Description */}
-                                    <div>
-                                        <h3 className="text-lg font-semibold text-foreground-primary mb-2">About</h3>
-                                        <p className="text-foreground-secondary leading-relaxed">
+                                    {/* Right: Content */}
+                                    <div className="p-8 lg:p-12 space-y-8 bg-background-primary/30 backdrop-blur-sm">
+                                        <div>
+                                            <h2 className="text-3xl lg:text-4xl font-bold text-foreground-primary mb-2 font-mono uppercase tracking-tight">
+                                                {selectedProject.name}
+                                            </h2>
+                                            <div className="h-1 w-20 bg-brand-primary/50 rounded-full" />
+                                        </div>
+
+                                        <p className="text-foreground-secondary text-lg leading-relaxed">
                                             {selectedProject.longDescription}
                                         </p>
-                                    </div>
 
-                                    {/* Technologies */}
-                                    <div>
-                                        <h3 className="text-lg font-semibold text-foreground-primary mb-3">Technologies</h3>
-                                        <div className="flex flex-wrap gap-2">
-                                            {selectedProject.technologies.map((tech) => (
-                                                <span
-                                                    key={tech}
-                                                    className="px-4 py-2 bg-brand-primary/10 text-brand-primary text-sm font-medium rounded-lg"
-                                                >
-                                                    {tech}
-                                                </span>
-                                            ))}
+                                        <div>
+                                            <h3 className="text-sm font-bold text-brand-primary uppercase tracking-widest mb-4">Stack</h3>
+                                            <div className="flex flex-wrap gap-2">
+                                                {selectedProject.technologies.map((tech) => (
+                                                    <span
+                                                        key={tech}
+                                                        className="px-3 py-1 bg-brand-primary/5 border border-brand-primary/20 text-brand-primary text-xs font-medium rounded-full"
+                                                    >
+                                                        {tech}
+                                                    </span>
+                                                ))}
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    {/* Links */}
-                                    <div className="flex gap-4 pt-4">
-                                        <a
-                                            href={selectedProject.githubUrl}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="flex-1"
-                                        >
-                                            <Button variant="outline" className="w-full gap-2">
-                                                <Icon name="code" size={20} />
-                                                View Code
-                                            </Button>
-                                        </a>
-                                        {selectedProject.liveUrl && (
+                                        <div className="flex gap-4 pt-4 border-t border-border-default">
                                             <a
-                                                href={selectedProject.liveUrl}
+                                                href={selectedProject.githubUrl}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
                                                 className="flex-1"
                                             >
-                                                <Button variant="primary" className="w-full gap-2">
-                                                    <Icon name="visible" size={20} />
-                                                    Live Demo
+                                                <Button variant="outline" className="w-full gap-2 transition-all hover:border-brand-primary hover:text-brand-primary group">
+                                                    <Icon name="code" size={20} className="group-hover:scale-110 transition-transform" />
+                                                    View Code
                                                 </Button>
                                             </a>
-                                        )}
+                                            {selectedProject.liveUrl && (
+                                                <a
+                                                    href={selectedProject.liveUrl}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="flex-1"
+                                                >
+                                                    <Button variant="primary" className="w-full gap-2 group">
+                                                        <Icon name="visible" size={20} className="group-hover:translate-x-1 transition-transform" />
+                                                        Live Demo
+                                                    </Button>
+                                                </a>
+                                            )}
+                                        </div>
                                     </div>
                                 </div>
                             </div>

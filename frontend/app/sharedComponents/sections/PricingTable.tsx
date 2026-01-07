@@ -133,9 +133,62 @@ export function PricingTable({ icon, title, subtitle, plans }: PricingTableProps
                                 </span>
                             </motion.div>
 
-                            <h2 className="text-4xl md:text-5xl lg:text-7xl font-black text-foreground-primary tracking-tighter uppercase font-heading leading-[0.85]">
-                                {title}
-                            </h2>
+                            <div className="flex flex-row justify-between items-center xl:block gap-4">
+                                <h2 className="text-4xl md:text-5xl lg:text-7xl font-black text-foreground-primary tracking-tighter uppercase font-heading leading-[0.85]">
+                                    {title}
+                                </h2>
+
+                                {/* MOBILE-ONLY TELEMETRY GRAPHIC */}
+                                <div className="xl:hidden flex items-center gap-4 h-16 md:h-20 max-w-[40%]">
+                                    <div className="flex flex-col gap-1 items-end">
+                                        <div className="flex gap-0.5">
+                                            {[...Array(8)].map((_, i) => (
+                                                <motion.div
+                                                    key={i}
+                                                    {...({
+                                                        animate: {
+                                                            height: [4, Math.random() * 20 + 10, 4],
+                                                            opacity: [0.3, 1, 0.3]
+                                                        },
+                                                        transition: {
+                                                            duration: 0.8 + Math.random(),
+                                                            repeat: Infinity,
+                                                            ease: "easeInOut"
+                                                        }
+                                                    } as any)}
+                                                    className="w-[3px] bg-brand-primary rounded-full"
+                                                />
+                                            ))}
+                                        </div>
+                                        <div className="flex items-center gap-2 opacity-30">
+                                            <div className="w-1 h-1 rounded-full bg-brand-primary animate-pulse" />
+                                            <span className="text-[7px] font-mono font-black text-brand-primary uppercase tracking-widest leading-none">
+                                                Live_Feed
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div className="relative w-12 h-12 md:w-16 md:h-16 flex items-center justify-center">
+                                        <motion.div
+                                            {...({
+                                                animate: { rotate: 360 },
+                                                transition: { duration: 10, repeat: Infinity, ease: "linear" }
+                                            } as any)}
+                                            className="absolute inset-0 border-t border-r border-brand-primary/20 rounded-full"
+                                        />
+                                        <motion.div
+                                            {...({
+                                                animate: { rotate: -360 },
+                                                transition: { duration: 15, repeat: Infinity, ease: "linear" }
+                                            } as any)}
+                                            className="absolute inset-2 border-b border-l border-brand-primary/10 rounded-full border-dashed"
+                                        />
+                                        <div className="text-[10px] font-mono font-black text-brand-primary opacity-40 animate-pulse">
+                                            TX
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
                             {subtitle && (
                                 <p className="text-base md:text-lg font-body opacity-60 tracking-tight leading-relaxed xl:w-[90%] font-medium">

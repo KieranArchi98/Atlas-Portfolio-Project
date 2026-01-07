@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Icon } from '../ui/Icon';
 
@@ -24,7 +24,12 @@ const FAQS = [
 ];
 
 export function PricingFAQ() {
-    const [openIndex, setOpenIndex] = useState<number | null>(0);
+    const [openIndex, setOpenIndex] = useState<number | null>(null);
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
     return (
         <section className="py-24 md:py-32 lg:py-48 relative overflow-hidden bg-white border-t border-gray-100" style={{ paddingTop: 0 }}>
@@ -105,7 +110,7 @@ export function PricingFAQ() {
                             </span>
                         </div>
                         <span className="text-[9px] font-mono font-medium text-gray-300 uppercase tracking-[0.4em]">
-                            UID: {Math.random().toString(16).slice(2, 10).toUpperCase()}
+                            UID: {mounted ? Math.random().toString(16).slice(2, 10).toUpperCase() : '--------'}
                         </span>
                     </div>
                 </div>

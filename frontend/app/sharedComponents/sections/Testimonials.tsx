@@ -57,7 +57,7 @@ const MARQUEE_ITEMS = [...TESTIMONIALS, ...TESTIMONIALS, ...TESTIMONIALS];
 
 export function Testimonials() {
     return (
-        <section className="py-32 relative bg-white overflow-hidden border-t border-gray-100">
+        <section className="py-32 relative bg-white overflow-hidden">
             {/* Header - Left Aligned to contrast with movement */}
             <div className="container mx-auto px-4 md:px-8 mb-16 relative z-10">
                 <div className="w-full max-w-[90%] md:max-w-[80%]">
@@ -78,8 +78,10 @@ export function Testimonials() {
 
                 <motion.div
                     className="flex gap-8 px-4"
-                    animate={{ x: ["0%", "-33.33%"] }} // Scroll 1/3rd (one set) then reset
-                    transition={{ duration: 32, repeat: Infinity, ease: "linear" }}
+                    {...({
+                        animate: { x: ["0%", "-33.33%"] },
+                        transition: { duration: 32, repeat: Infinity, ease: "linear" }
+                    } as any)}
                 >
                     {MARQUEE_ITEMS.map((t, idx) => (
                         <div

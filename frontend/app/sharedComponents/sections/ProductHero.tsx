@@ -42,23 +42,19 @@ export function ProductHero({
     }, [visibleLines]);
 
     return (
-        <section className="relative min-h-[75vh] flex items-center bg-background-primary overflow-hidden border-b border-border-default">
+        <section className="relative min-h-[75vh] flex items-center bg-white overflow-hidden">
             {/* --- Background Elements --- */}
-
-            {/* WebGL Data Particles */}
             <ProductHeroBackground />
-
-
-
-
             <div className="container mx-auto px-6 relative z-10 w-[90%] xl:w-[85%]">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
                     {/* LEFT COLUMN: Content */}
                     <motion.div
-                        initial={{ opacity: 0, x: -30 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.8 }}
+                        {...({
+                            initial: { opacity: 0, x: -30 },
+                            animate: { opacity: 1, x: 0 },
+                            transition: { duration: 0.8 }
+                        } as any)}
                         className="space-y-8"
                     >
                         {/* Technical Badge */}
@@ -95,9 +91,11 @@ export function ProductHero({
 
                     {/* RIGHT COLUMN: Terminal Visual */}
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.95, y: 30 }}
-                        animate={{ opacity: 1, scale: 1, y: 0 }}
-                        transition={{ duration: 1, delay: 0.2 }}
+                        {...({
+                            initial: { opacity: 0, scale: 0.95, y: 30 },
+                            animate: { opacity: 1, scale: 1, y: 0 },
+                            transition: { duration: 1, delay: 0.2 }
+                        } as any)}
                         className="relative hidden lg:block"
                     >
                         {/* Floating Glass Panel behind */}
@@ -121,8 +119,10 @@ export function ProductHero({
                                     {TERMINAL_LINES.map((line, i) => (
                                         <motion.div
                                             key={i}
-                                            initial={{ opacity: 0, x: -10 }}
-                                            animate={{ opacity: visibleLines >= i ? 1 : 0, x: visibleLines >= i ? 0 : -10 }}
+                                            {...({
+                                                initial: { opacity: 0, x: -10 },
+                                                animate: { opacity: visibleLines >= i ? 1 : 0, x: visibleLines >= i ? 0 : -10 }
+                                            } as any)}
                                             className={`${line.color}`}
                                         >
                                             <span className="opacity-50 mr-2">{i < 9 ? `0${i + 1}` : i + 1}</span>
@@ -142,9 +142,11 @@ export function ProductHero({
                         {/* Floating Badge */}
                         <motion.div
                             className="absolute -right-8 -bottom-8 bg-white p-4 rounded-lg shadow-xl border border-gray-100 hidden xl:block"
-                            initial={{ y: 20, opacity: 0 }}
-                            animate={{ y: 0, opacity: 1 }}
-                            transition={{ delay: 3 }}
+                            {...({
+                                initial: { y: 20, opacity: 0 },
+                                animate: { y: 0, opacity: 1 },
+                                transition: { delay: 3 }
+                            } as any)}
                         >
                             <div className="flex items-center gap-3">
                                 <div className="bg-green-100 p-2 rounded-full">

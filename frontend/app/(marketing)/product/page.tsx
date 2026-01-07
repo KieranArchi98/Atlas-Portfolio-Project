@@ -1,5 +1,5 @@
 import { ProductHero } from '../../sharedComponents/sections/ProductHero';
-import { FeatureGrid } from '../../sharedComponents/sections/FeatureGrid';
+import { TechnicalSynchronizer } from '../../sharedComponents/sections/TechnicalSynchronizer';
 import { MetricsStats } from '@/app/sharedComponents/sections/MetricsStats';
 import { Testimonials } from '@/app/sharedComponents/sections/Testimonials';
 import { Certifications } from '@/app/sharedComponents/sections/Certifications';
@@ -16,14 +16,10 @@ export default function ProductPage() {
 
       {/* Metrics Section - White Theme */}
       <MetricsStats variant="white" />
-      <br></br>
-      <br></br>
 
-      <FeatureGrid
-        title=""
-        columns={2}
+      <TechnicalSynchronizer
         visualComponent={ProductFeatureVisual}
-        features={[
+        modules={[
           {
             title: 'Full Stack Development',
             description: 'End-to-end software engineering covering modern web apps, mobile solutions, and robust backend systems.',

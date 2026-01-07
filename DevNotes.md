@@ -102,3 +102,9 @@ Dashboard ->
 
 #revamp prompt
 great, and i like most of this page, but take that pricingfinalcta section and just revamp it using your own research for industry standard structure, layout, theme, styling, and ux. ensure it fits well with the surrounding sections and with the website in general. make it unique and original, something not seen in the rest of the website, but also don't use this basic 1 column 1 row single card cta that is so plain
+
+
+
+footer
+navbar + sidebar
+logo/icon

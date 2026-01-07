@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useEffect, useState } from 'react';
-import { motion, useInView, useSpring, useMotionValue } from 'framer-motion';
+import { motion, useInView, useSpring, useMotionValue, useMotionValueEvent } from 'framer-motion';
 import { Icon } from '../ui/Icon';
 import { MetricVisual } from './MetricVisuals';
 
@@ -22,36 +22,37 @@ interface MetricsStatsProps {
 
 const DEFAULT_METRICS: MetricItem[] = [
     {
-        label: "Global Uptime",
-        value: 99.9,
-        suffix: "%",
-        description: "Consistency across all deployed production nodes.",
-        icon: "server",
-        visual: "uptime"
+        label: "Revenue Generated",
+        value: 55,
+        prefix: "$",
+        suffix: "K+",
+        description: "Direct impact and value delivered through technical solutions.",
+        icon: "pricing",
+        visual: "revenue"
     },
     {
-        label: "Components Library",
-        value: 850,
-        prefix: "+",
-        description: "Reusable logic modules synthesized for scale.",
-        icon: "product",
-        visual: "modules"
-    },
-    {
-        label: "Client Architectures",
-        value: 120,
-        prefix: "+",
-        description: "Unique digital infrastructures engineered.",
-        icon: "globe", // Changed from 'user' to 'globe' for 'architectures'
-        visual: "clients"
-    },
-    {
-        label: "Performance Score",
-        value: 100,
-        suffix: "/100",
-        description: "Optimization standards maintained via CI/CD.",
+        label: "Certifications Gained",
+        value: 4,
+        suffix: "+",
+        description: "Verified expertise across cloud, networking, and software.",
         icon: "check",
-        visual: "performance"
+        visual: "certifications"
+    },
+    {
+        label: "Projects Created",
+        value: 35,
+        suffix: "+",
+        description: "Digital architectures and products built from the ground up.",
+        icon: "projects",
+        visual: "projects"
+    },
+    {
+        label: "Hours Invested",
+        value: 4000,
+        suffix: "+",
+        description: "Relentless commitment to technical excellence and learning.",
+        icon: "dashboard",
+        visual: "hours"
     }
 ];
 
@@ -59,7 +60,7 @@ function AnimatedCounter({ value, prefix = "", suffix = "" }: { value: number; p
     const ref = useRef<HTMLSpanElement>(null);
     const motionValue = useMotionValue(0);
     const springValue = useSpring(motionValue, { damping: 50, stiffness: 100 });
-    const isInView = useInView(ref, { once: true, margin: "-100px" });
+    const isInView = useInView(ref, { once: true, amount: 0 });
 
     useEffect(() => {
         if (isInView) {
@@ -67,16 +68,12 @@ function AnimatedCounter({ value, prefix = "", suffix = "" }: { value: number; p
         }
     }, [motionValue, isInView, value]);
 
-    useEffect(() => {
-        // Initialize with default if needed, or handle updates
-        const unsubscribe = springValue.on("change", (latest) => {
-            if (ref.current) {
-                const isFloat = value % 1 !== 0;
-                ref.current.textContent = `${prefix}${latest.toFixed(isFloat ? 1 : 0)}${suffix}`;
-            }
-        });
-        return unsubscribe;
-    }, [springValue, prefix, suffix, value]);
+    useMotionValueEvent(springValue, "change", (latest) => {
+        if (ref.current) {
+            const isFloat = value % 1 !== 0;
+            ref.current.textContent = `${prefix}${latest.toFixed(isFloat ? 1 : 0)}${suffix}`;
+        }
+    });
 
     return <span ref={ref} className="font-mono">{prefix}0{suffix}</span>;
 }
@@ -90,7 +87,7 @@ export function MetricsStats({ metrics = DEFAULT_METRICS, variant = 'default' }:
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-100px" }}
+                    viewport={{ once: true, amount: 0 }}
                     transition={{ duration: 0.8 }}
                     className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8"
                 >

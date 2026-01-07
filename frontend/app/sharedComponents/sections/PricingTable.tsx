@@ -13,34 +13,61 @@ interface Plan {
 }
 
 interface PricingTableProps {
+    icon?: string;
     title: string;
     subtitle?: string;
     plans: Plan[];
 }
 
-export function PricingTable({ title, subtitle, plans }: PricingTableProps) {
+export function PricingTable({ icon, title, subtitle, plans }: PricingTableProps) {
     const [activeSlide, setActiveSlide] = useState(0);
     const scrollRef = useRef<HTMLDivElement>(null);
 
     // Handle scroll to update active dot
     const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
-        const scrollPosition = e.currentTarget.scrollLeft;
-        const width = e.currentTarget.offsetWidth;
-        const newIndex = Math.round(scrollPosition / width);
-        if (newIndex !== activeSlide && newIndex < plans.length) {
-            setActiveSlide(newIndex);
+        const container = e.currentTarget;
+        const scrollPosition = container.scrollLeft;
+
+        // Find the index of the element currently most in view
+        const children = Array.from(container.children) as HTMLElement[];
+        // Filter out style tags or other non-card elements
+        const cardElements = children.filter(child => child.tagName !== 'STYLE');
+
+        let bestIndex = 0;
+        let minDistance = Infinity;
+
+        cardElements.forEach((child, i) => {
+            const cardCenter = child.offsetLeft + (child.offsetWidth / 2);
+            const containerCenter = container.offsetLeft + scrollPosition + (container.offsetWidth / 2);
+            const distance = Math.abs(cardCenter - containerCenter);
+
+            if (distance < minDistance) {
+                minDistance = distance;
+                bestIndex = i;
+            }
+        });
+
+        if (bestIndex !== activeSlide) {
+            setActiveSlide(bestIndex);
         }
     };
 
     // Scroll to specific slide
     const scrollToSlide = (index: number) => {
         if (scrollRef.current) {
-            const width = scrollRef.current.offsetWidth;
-            scrollRef.current.scrollTo({
-                left: index * width,
-                behavior: 'smooth'
-            });
-            setActiveSlide(index);
+            const container = scrollRef.current;
+            const children = Array.from(container.children) as HTMLElement[];
+            const cardElements = children.filter(child => child.tagName !== 'STYLE');
+            const targetElement = cardElements[index];
+
+            if (targetElement) {
+                const targetScroll = (targetElement.offsetLeft - container.offsetLeft) - (container.offsetWidth / 2) + (targetElement.offsetWidth / 2);
+                container.scrollTo({
+                    left: targetScroll,
+                    behavior: 'smooth'
+                });
+                setActiveSlide(index);
+            }
         }
     };
 
@@ -57,9 +84,33 @@ export function PricingTable({ title, subtitle, plans }: PricingTableProps) {
     };
 
     return (
-        <section className="py-24 relative overflow-hidden bg-background-primary">
-            {/* Ambient Background Effect */}
-            <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_10%_10%,rgba(59,130,246,0.05)_0%,transparent_50%)] pointer-events-none" />
+        <section className="py-24 relative overflow-hidden bg-white border-b border-border-default/50">
+            {/* Background Particles (Deterministic) */}
+            <div className="absolute inset-0 pointer-events-none">
+                {Array.from({ length: 15 }).map((_, i) => (
+                    <motion.div
+                        key={i}
+                        className="absolute w-1 h-1 bg-brand-primary/20 rounded-full"
+                        {...({
+                            initial: {
+                                left: `${(i * 7) % 100}%`,
+                                top: `${(i * 13) % 100}%`,
+                                scale: 0
+                            },
+                            animate: {
+                                y: [0, -100],
+                                opacity: [0, 1, 0],
+                                scale: [0, 1.5, 0]
+                            },
+                            transition: {
+                                duration: 4 + (i % 3),
+                                repeat: Infinity,
+                                delay: i * 0.2
+                            }
+                        } as any)}
+                    />
+                ))}
+            </div>
 
             <div className="w-full md:w-[95%] lg:w-[90%] xl:w-[85%] 2xl:w-[80%] mx-auto px-4 md:px-6 relative z-10">
                 <div className="grid grid-cols-1 xl:grid-cols-12 gap-12 lg:gap-16">
@@ -76,7 +127,8 @@ export function PricingTable({ title, subtitle, plans }: PricingTableProps) {
                                 className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-primary/10 border border-brand-primary/20"
                             >
                                 <span className="w-1.5 h-1.5 rounded-full bg-brand-primary" />
-                                <span className="text-[10px] font-bold uppercase tracking-widest text-brand-primary font-mono">
+                                <span className="text-[10px] font-bold uppercase tracking-widest text-brand-primary font-mono flex items-center gap-2">
+                                    {icon && <Icon name={icon as any} size={12} />}
                                     Service Baseline
                                 </span>
                             </motion.div>
@@ -182,12 +234,12 @@ export function PricingTable({ title, subtitle, plans }: PricingTableProps) {
                                         viewport: { once: true },
                                         transition: { delay: idx * 0.1, duration: 0.8 },
                                     } as any)}
-                                    className="min-w-[100%] sm:min-w-[48%] xl:min-w-0 h-full flex flex-col snap-center shrink-0 xl:shrink"
+                                    className="min-w-[100%] md:min-w-[70%] lg:min-w-[60%] xl:min-w-0 h-full flex flex-col snap-center shrink-0 xl:shrink"
                                 >
                                     <div
                                         className={`h-full relative flex flex-col gap-10 w-full p-8 rounded-[2.5rem] border transition-all duration-700 overflow-hidden group ${plan.isPopular
-                                            ? 'bg-white/5 backdrop-blur-2xl border-brand-primary/40 shadow-[0_30px_60px_-15px_rgba(59,130,246,0.2)]'
-                                            : 'bg-background-secondary/30 backdrop-blur-md border border-border-default hover:border-brand-primary/30'
+                                            ? 'bg-white border-brand-primary shadow-[0_20px_50px_-12px_rgba(0,0,0,0.1)]'
+                                            : 'bg-surface-secondary/10 border-border-default hover:border-brand-primary/30'
                                             }`}
                                     >
                                         <div className="space-y-6 relative z-10">

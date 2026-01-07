@@ -64,7 +64,7 @@ const FEATURES = [
 
 export function PricingFeatures() {
     return (
-        <section className="pb-24 bg-background-primary relative overflow-hidden">
+        <section className="py-24 bg-background-primary relative overflow-hidden">
             <div className="w-full px-6 md:px-12 lg:px-16 relative z-10">
 
                 <div className="text-center w-full mb-16">
@@ -80,10 +80,12 @@ export function PricingFeatures() {
                     {FEATURES.map((feature, idx) => (
                         <motion.div
                             key={idx}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, margin: "-50px" }}
-                            transition={{ delay: feature.delay, duration: 0.5 }}
+                            {...({
+                                initial: { opacity: 0, y: 20 },
+                                whileInView: { opacity: 1, y: 0 },
+                                viewport: { once: true, margin: "-50px" },
+                                transition: { delay: feature.delay, duration: 0.5 },
+                            } as any)}
                             className={`${feature.colSpan} group relative bg-surface-primary border border-border-default rounded-2xl p-8 overflow-hidden hover:border-brand-primary/30 transition-colors`}
                         >
                             {/* Hover Glow */}

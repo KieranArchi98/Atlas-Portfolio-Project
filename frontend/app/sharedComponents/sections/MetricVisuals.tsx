@@ -2,123 +2,114 @@
 
 import { motion } from 'framer-motion';
 
-const CONTAINER_CLASS = "h-full w-4 md:w-6 relative flex flex-col justify-end items-center overflow-hidden rounded-full bg-surface-secondary/20";
+const CONTAINER_CLASS = "h-full w-8 md:w-10 relative flex flex-col justify-end items-center overflow-hidden rounded-full bg-surface-secondary/40 border border-brand-primary/10 shadow-inner";
 
-export function UptimeVisual() {
+export function RevenueVisual() {
     return (
         <div className={CONTAINER_CLASS}>
-            {/* Segments lighting up from bottom */}
-            {Array.from({ length: 6 }).map((_, i) => (
-                <motion.div
-                    key={i}
-                    className="w-full h-2 mb-1 bg-green-500 rounded-sm"
-                    initial={{ opacity: 0.2 }}
-                    whileInView={{ opacity: [0.2, 1, 0.2] }}
-                    viewport={{ once: true }}
-                    transition={{
-                        duration: 3,
-                        delay: (5 - i) * 0.2, // Bottom to top
-                        repeat: Infinity,
-                        repeatDelay: 1
-                    }}
-                />
-            ))}
-        </div>
-    );
-}
-
-export function ModulesVisual() {
-    return (
-        <div className={CONTAINER_CLASS}>
-            {/* Stacking Blocks */}
-            <motion.div className="relative w-full h-full">
-                {Array.from({ length: 4 }).map((_, i) => (
-                    <motion.div
-                        key={i}
-                        className="absolute bottom-0 w-full bg-blue-500 rounded-[2px] border border-white/10"
-                        style={{ height: '20%' }}
-                        initial={{ y: -50, opacity: 0 }}
-                        whileInView={{ y: -(i * 14), opacity: 1 }} // Stacking vertically with spacing
-                        viewport={{ once: true }}
-                        transition={{
-                            type: "spring",
-                            damping: 12,
-                            delay: i * 0.5
-                        }}
-                    />
-                ))}
-            </motion.div>
-        </div>
-    );
-}
-
-export function ClientVisual() {
-    return (
-        <div className={CONTAINER_CLASS}>
-            {/* Expanding Network/Node line */}
+            {/* Rising Bar with glowing cap */}
             <motion.div
-                className="w-1 bg-purple-500/30 h-full relative"
-            >
-                <motion.div
-                    className="absolute bottom-0 w-full bg-purple-500"
-                    initial={{ height: "0%" }}
-                    whileInView={{ height: "100%" }}
-                    transition={{ duration: 2.5, ease: "easeInOut" }}
-                />
-                {[20, 50, 80].map((pct, i) => (
-                    <motion.div
-                        key={i}
-                        className="absolute left-1/2 -translate-x-1/2 w-3 h-3 bg-purple-400 rounded-full shadow-[0_0_8px_rgba(168,85,247,0.6)]"
-                        style={{ bottom: `${pct}%` }}
-                        initial={{ scale: 0 }}
-                        whileInView={{ scale: 1 }}
-                        transition={{ delay: 0.5 + (i * 0.3), type: "spring" }}
-                    />
-                ))}
-            </motion.div>
-        </div>
-    );
-}
-
-export function PerformanceVisual() {
-    return (
-        <div className={CONTAINER_CLASS}>
-            {/* Rising Thermometer / Speed Gauge */}
-            <div className="w-full h-full bg-gradient-to-t from-orange-500 via-yellow-400 to-red-500 opacity-20 absolute" />
-
-            <motion.div
-                className="w-full bg-gradient-to-t from-orange-500 via-yellow-400 to-red-500"
+                className="w-full bg-emerald-500 rounded-t-sm relative"
                 initial={{ height: "0%" }}
-                whileInView={{ height: "100%" }}
-                transition={{ duration: 2, ease: "easeOut" }}
-            />
-
-            {/* Particles rising */}
-            {Array.from({ length: 5 }).map((_, i) => (
+                whileInView={{ height: "85%" }}
+                viewport={{ once: true, amount: 0 }}
+                transition={{ duration: 1.5, ease: "easeOut" }}
+            >
+                <div className="absolute top-0 left-0 w-full h-1 bg-emerald-300 shadow-[0_0_15px_rgba(16,185,129,1)]" />
+            </motion.div>
+            {/* Floating Particles */}
+            {Array.from({ length: 4 }).map((_, i) => (
                 <motion.div
                     key={i}
-                    className="absolute w-1 h-1 bg-white rounded-full"
-                    initial={{ bottom: 0, opacity: 0 }}
-                    whileInView={{ bottom: "100%", opacity: [0, 1, 0] }}
+                    className="absolute w-1 h-1 bg-emerald-400 rounded-full"
+                    initial={{ bottom: "0%", opacity: 0 }}
+                    animate={{ bottom: "100%", opacity: [0, 1, 0] }}
                     transition={{
-                        duration: 2 + (i * 0.5),
+                        duration: 2,
+                        delay: i * 0.5,
                         repeat: Infinity,
-                        delay: i * 0.8,
                         ease: "linear"
                     }}
-                    style={{ left: `${15 + (i * 18)}%` }}
+                    style={{ left: `${20 + (i * 20)}%` }}
                 />
             ))}
+        </div>
+    );
+}
+
+export function CertificationsVisual() {
+    return (
+        <div className={CONTAINER_CLASS}>
+            <motion.div
+                className="w-full bg-blue-600 rounded-t-sm relative"
+                initial={{ height: "0%" }}
+                whileInView={{ height: "65%" }}
+                viewport={{ once: true, amount: 0 }}
+                transition={{ duration: 1.5, ease: "easeOut" }}
+            >
+                <div className="absolute top-0 left-0 w-full h-1 bg-blue-300 shadow-[0_0_15px_rgba(37,99,235,1)]" />
+                {/* Floating Ring Particle */}
+                <motion.div
+                    className="absolute -top-1 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full border border-blue-400/50"
+                    animate={{ scale: [1, 2], opacity: [0.5, 0] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                />
+            </motion.div>
+        </div>
+    );
+}
+
+export function ProjectsVisual() {
+    return (
+        <div className={CONTAINER_CLASS}>
+            <motion.div
+                className="w-full bg-violet-600 rounded-t-sm relative"
+                initial={{ height: "0%" }}
+                whileInView={{ height: "75%" }}
+                viewport={{ once: true, amount: 0 }}
+                transition={{ duration: 1.5, ease: "easeOut" }}
+            >
+                <div className="absolute top-0 left-0 w-full h-1 bg-violet-300 shadow-[0_0_15px_rgba(124,58,237,1)]" />
+                {/* Layered segments */}
+                <div className="absolute inset-0 flex flex-col-reverse p-[1px] gap-[2px]">
+                    {Array.from({ length: 6 }).map((_, i) => (
+                        <div key={i} className="w-full h-1.5 bg-violet-400/20 rounded-[1px]" />
+                    ))}
+                </div>
+            </motion.div>
+        </div>
+    );
+}
+
+export function HoursVisual() {
+    return (
+        <div className={CONTAINER_CLASS}>
+            <motion.div
+                className="w-full bg-amber-500 rounded-t-sm relative"
+                initial={{ height: "0%" }}
+                whileInView={{ height: "90%" }}
+                viewport={{ once: true, amount: 0 }}
+                transition={{ duration: 1.8, ease: "easeOut" }}
+            >
+                <div className="absolute top-0 left-0 w-full h-1 bg-amber-200 shadow-[0_0_15px_rgba(245,158,11,1)]" />
+                {/* Scanning Light Effect */}
+                <motion.div
+                    className="absolute inset-0 bg-gradient-to-t from-transparent via-white/40 to-transparent h-4 w-full"
+                    animate={{ top: ["100%", "-20%"] }}
+                    transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                />
+            </motion.div>
         </div>
     );
 }
 
 export function MetricVisual({ variant }: { variant: string }) {
     switch (variant) {
-        case 'uptime': return <UptimeVisual />;
-        case 'modules': return <ModulesVisual />;
-        case 'clients': return <ClientVisual />;
-        case 'performance': return <PerformanceVisual />;
-        default: return <UptimeVisual />;
+        case 'revenue': return <RevenueVisual />;
+        case 'certifications': return <CertificationsVisual />;
+        case 'projects': return <ProjectsVisual />;
+        case 'hours': return <HoursVisual />;
+        default: return <RevenueVisual />;
     }
 }
+

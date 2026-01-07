@@ -70,7 +70,7 @@ export function ProductHero({
                         <div className="space-y-4">
                             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter text-foreground-primary leading-[1.05]">
                                 {title.split(' ').map((word, i) => (
-                                    <span key={i} className="block">{word}</span>
+                                    <span key={`word-${i}`} className="block">{word}</span>
                                 ))}
                             </h1>
                             <div className="w-20 h-1 bg-brand-primary" />

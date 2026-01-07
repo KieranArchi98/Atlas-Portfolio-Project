@@ -5,7 +5,7 @@ import { PricingTable } from '@/app/sharedComponents/sections/PricingTable';
 
 export default function PricingPage() {
   return (
-    <div className="bg-background-primary">
+    <div className="bg-white">
       <PricingTable
         icon="settings"
         title="Services"
@@ -53,11 +53,11 @@ export default function PricingPage() {
       {/* What's Included Grid */}
       <PricingFeatures />
 
-      {/* FAQ Section */}
-      <PricingFAQ />
-
       {/* Final High-Impact CTA */}
       <PricingFinalCTA />
+
+      {/* FAQ Section */}
+      <PricingFAQ />
     </div>
   );
 }

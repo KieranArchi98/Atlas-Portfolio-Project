@@ -7,7 +7,7 @@ import { ProductFeatureVisual } from '@/app/sharedComponents/sections/ProductFea
 
 export default function ProductPage() {
   return (
-    <div className="bg-background-primary flex flex-col gap-0">
+    <>
       <ProductHero
         sectionTag="SYSTEM_STATUS: ONLINE"
         title="Systems & Software Engineering"
@@ -56,6 +56,6 @@ export default function ProductPage() {
 
       {/* Certifications Section */}
       <Certifications />
-    </div>
+    </>
   );
 }

@@ -96,3 +96,9 @@ Dashboard ->
 - Testimonials: Width Issue, try find a way to make them non-uniform so they appear more dynamically.
 - Certifications: Should be more impactful, glowing, and meaningful (using annimations and visual effects) they're accolades, symbols of achievement, and make you stand out.
 - Hero: It should be informative, engaging, and original, but without competing with the landing page. Experiment with unique variations.
+
+
+
+
+#revamp prompt
+great, and i like most of this page, but take that pricingfinalcta section and just revamp it using your own research for industry standard structure, layout, theme, styling, and ux. ensure it fits well with the surrounding sections and with the website in general. make it unique and original, something not seen in the rest of the website, but also don't use this basic 1 column 1 row single card cta that is so plain

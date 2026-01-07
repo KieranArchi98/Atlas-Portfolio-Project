@@ -27,51 +27,88 @@ export function PricingFAQ() {
     const [openIndex, setOpenIndex] = useState<number | null>(0);
 
     return (
-        <section className="py-24 bg-background-secondary/30 relative border-t border-border-default/40">
-            <div className="container mx-auto px-6 max-w-3xl">
+        <section className="py-24 md:py-32 lg:py-48 relative overflow-hidden bg-white border-t border-gray-100" style={{ paddingTop: 0 }}>
+            {/* Background Texture: Subtle Technical Grid */}
+            <div className="absolute inset-0 opacity-[0.02] pointer-events-none"
+                style={{ backgroundImage: `radial-gradient(#000 0.5px, transparent 0.5px)`, backgroundSize: '40px 40px' }} />
 
-                <div className="text-center mb-16 space-y-4">
-                    <h2 className="text-3xl md:text-4xl font-bold text-foreground-primary">
-                        Common Queries
-                    </h2>
-                    <div className="w-12 h-1 bg-brand-primary mx-auto rounded-full" />
-                </div>
+            <div className="w-[95%] md:w-[92%] mx-auto relative z-10">
 
-                <div className="space-y-4">
+
+                {/* SINGLE COLUMN DROPDOWNS */}
+                <div className="w-full space-y-4">
                     {FAQS.map((faq, idx) => (
-                        <div key={idx} className="bg-background-primary border border-border-default rounded-xl overflow-hidden">
+                        <div
+                            key={idx}
+                            className={`group border border-border-default transition-all duration-500 rounded-[2rem] md:rounded-[2.5rem] overflow-hidden ${openIndex === idx ? 'bg-brand-primary/[0.02] border-brand-primary/20' : 'bg-white hover:border-brand-primary/30 shadow-sm hover:shadow-md'}`}
+                        >
                             <button
                                 onClick={() => setOpenIndex(openIndex === idx ? null : idx)}
-                                className="w-full flex items-center justify-between p-6 text-left hover:bg-surface-secondary/20 transition-colors"
+                                className="w-full flex items-start gap-8 p-8 md:p-10 text-left transition-all"
                             >
-                                <span className="font-semibold text-foreground-primary text-lg">{faq.question}</span>
-                                <motion.div
-                                    animate={{ rotate: openIndex === idx ? 90 : 0 }}
-                                    transition={{ duration: 0.2 }}
-                                    className="text-foreground-secondary"
-                                >
-                                    <Icon name="arrowRight" size={20} />
-                                </motion.div>
-                            </button>
+                                {/* Technical Index */}
+                                <div className="flex flex-col items-center pt-1">
+                                    <span className="text-[10px] font-mono font-black text-gray-300 group-hover:text-brand-primary transition-colors">
+                                        {String(idx + 1).padStart(2, '0')}
+                                    </span>
+                                    <div className={`w-[1px] h-8 bg-gray-100 mt-2 transition-all ${openIndex === idx ? 'h-16 bg-brand-primary' : ''}`} />
+                                </div>
 
-                            <AnimatePresence>
-                                {openIndex === idx && (
-                                    <motion.div
-                                        initial={{ height: 0, opacity: 0 }}
-                                        animate={{ height: "auto", opacity: 1 }}
-                                        exit={{ height: 0, opacity: 0 }}
-                                        transition={{ duration: 0.3, ease: "easeInOut" }}
-                                    >
-                                        <div className="px-6 pb-6 text-foreground-secondary leading-relaxed">
-                                            {faq.answer}
-                                        </div>
-                                    </motion.div>
-                                )}
-                            </AnimatePresence>
+                                <div className="flex-1 space-y-4">
+                                    <span className="block text-xl md:text-2xl font-black text-foreground-primary group-hover:text-brand-primary transition-colors leading-snug font-heading tracking-tighter uppercase">
+                                        {faq.question}
+                                    </span>
+
+                                    <AnimatePresence>
+                                        {openIndex === idx && (
+                                            <motion.div
+                                                {...({
+                                                    initial: { opacity: 0, y: -10 },
+                                                    animate: { opacity: 1, y: 0 },
+                                                    exit: { opacity: 0, y: -10 },
+                                                    transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] }
+                                                } as any)}
+                                                className="overflow-hidden"
+                                            >
+                                                <p className="text-base md:text-lg font-body opacity-60 tracking-tight leading-relaxed max-w-[95%] font-medium">
+                                                    {faq.answer}
+                                                </p>
+                                            </motion.div>
+                                        )}
+                                    </AnimatePresence>
+                                </div>
+
+                                <div className={`mt-1 transition-transform duration-500 ${openIndex === idx ? 'rotate-90 text-brand-primary' : 'text-gray-300'}`}>
+                                    <Icon name="arrowRight" size={24} strokeWidth={3} />
+                                </div>
+                            </button>
                         </div>
                     ))}
-                </div>
 
+                    {/* Footer Hardware Status */}
+                    <div className="mt-12 flex items-center justify-between px-8 py-6 border border-gray-100 bg-white shadow-sm">
+                        <div className="flex items-center gap-4">
+                            <div className="flex gap-1">
+                                {[1, 2, 3].map(i => (
+                                    <motion.div
+                                        key={i}
+                                        {...({
+                                            animate: { opacity: [0.3, 1, 0.3] },
+                                            transition: { duration: 1.5, repeat: Infinity, delay: i * 0.2 }
+                                        } as any)}
+                                        className="w-1.5 h-1.5 rounded-full bg-brand-primary"
+                                    />
+                                ))}
+                            </div>
+                            <span className="text-[9px] font-mono font-black text-gray-400 uppercase tracking-widest">
+                                system_status: resolving_queries
+                            </span>
+                        </div>
+                        <span className="text-[9px] font-mono font-medium text-gray-300 uppercase tracking-[0.4em]">
+                            UID: {Math.random().toString(16).slice(2, 10).toUpperCase()}
+                        </span>
+                    </div>
+                </div>
             </div>
         </section>
     );

@@ -24,7 +24,8 @@ export function LogoShowcase({
     return (
         <section className="relative bg-white overflow-hidden pb-16 md:pb-32">
             <div className="w-full relative z-10">
-
+                <br></br>
+                <br></br>
                 {/* First Track - Scrolling Right to Left */}
                 <div className="relative mb-8 md:mb-12">
                     {/* Gradient fade edges */}
@@ -122,6 +123,10 @@ export function LogoShowcase({
                     </div>
                 </div>
             </div>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
         </section>
     );
 }

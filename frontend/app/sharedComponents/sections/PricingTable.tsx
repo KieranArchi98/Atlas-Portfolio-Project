@@ -133,12 +133,12 @@ export function PricingTable({ icon, title, subtitle, plans }: PricingTableProps
                                 </span>
                             </motion.div>
 
-                            <h2 className="text-4xl md:text-5xl lg:text-7xl font-black text-foreground-primary tracking-tighter uppercase font-mono leading-[0.85]">
+                            <h2 className="text-4xl md:text-5xl lg:text-7xl font-black text-foreground-primary tracking-tighter uppercase font-heading leading-[0.85]">
                                 {title}
                             </h2>
 
                             {subtitle && (
-                                <p className="text-base md:text-lg font-mono opacity-60 lowercase tracking-tight leading-relaxed xl:w-[90%]">
+                                <p className="text-base md:text-lg font-body opacity-60 tracking-tight leading-relaxed xl:w-[90%] font-medium">
                                     {subtitle}
                                 </p>
                             )}
@@ -244,7 +244,7 @@ export function PricingTable({ icon, title, subtitle, plans }: PricingTableProps
                                     >
                                         <div className="space-y-6 relative z-10">
                                             <div className="flex justify-between items-center">
-                                                <h3 className="text-xl font-bold text-foreground-primary tracking-tight font-mono uppercase group-hover:text-brand-primary transition-colors">
+                                                <h3 className="text-xl font-bold text-foreground-primary tracking-tight font-heading uppercase group-hover:text-brand-primary transition-colors">
                                                     {plan.name}
                                                 </h3>
                                                 {plan.isPopular && (
@@ -260,7 +260,7 @@ export function PricingTable({ icon, title, subtitle, plans }: PricingTableProps
                                                 </span>
                                             </div>
 
-                                            <p className="text-xs text-foreground-secondary leading-relaxed opacity-60 group-hover:opacity-100 transition-opacity font-mono lowercase min-h-[3rem]">
+                                            <p className="text-xs text-foreground-secondary leading-relaxed opacity-60 group-hover:opacity-100 transition-opacity font-body min-h-[3rem] font-medium">
                                                 {plan.description}
                                             </p>
                                         </div>
@@ -278,7 +278,7 @@ export function PricingTable({ icon, title, subtitle, plans }: PricingTableProps
                                         </div>
 
                                         <button
-                                            className={`w-full py-5 rounded-2xl font-mono font-bold uppercase tracking-[0.2em] text-[10px] transition-all duration-500 relative z-10 overflow-hidden ${plan.isPopular
+                                            className={`w-full py-5 rounded-2xl font-mono font-bold uppercase tracking-[0.2em] text-sm transition-all duration-500 relative z-10 overflow-hidden ${plan.isPopular
                                                 ? 'bg-brand-primary text-white shadow-xl shadow-brand-primary/20 hover:scale-[1.02] hover:shadow-brand-primary/40 active:scale-95'
                                                 : 'bg-background-muted text-foreground-primary border border-border-default hover:border-brand-primary hover:text-brand-primary'
                                                 }`}

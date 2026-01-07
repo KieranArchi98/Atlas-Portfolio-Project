@@ -32,86 +32,103 @@ export function PricingFAQ() {
     }, []);
 
     return (
-        <section className="py-24 md:py-32 lg:py-48 relative overflow-hidden bg-white border-t border-gray-100" style={{ paddingTop: 0 }}>
-            {/* Background Texture: Subtle Technical Grid */}
-            <div className="absolute inset-0 opacity-[0.02] pointer-events-none"
-                style={{ backgroundImage: `radial-gradient(#000 0.5px, transparent 0.5px)`, backgroundSize: '40px 40px' }} />
+        <section className="py-12 md:py-32 relative overflow-hidden bg-white">
+            <div className="w-[95%] md:w-[90%] xl:w-[85%] mx-auto relative z-10">
 
-            <div className="w-[95%] md:w-[92%] mx-auto relative z-10">
-
-
-                {/* SINGLE COLUMN DROPDOWNS */}
-                <div className="w-full space-y-4">
-                    {FAQS.map((faq, idx) => (
-                        <div
-                            key={idx}
-                            className={`group border border-border-default transition-all duration-500 rounded-[2rem] md:rounded-[2.5rem] overflow-hidden ${openIndex === idx ? 'bg-brand-primary/[0.02] border-brand-primary/20' : 'bg-white hover:border-brand-primary/30 shadow-sm hover:shadow-md'}`}
+                <div className="flex flex-col gap-12">
+                    {/* Header */}
+                    <div className="space-y-4">
+                        <motion.div
+                            initial={{ opacity: 0, x: -20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.5 }}
+                            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-primary/5 border border-brand-primary/10"
                         >
-                            <button
-                                onClick={() => setOpenIndex(openIndex === idx ? null : idx)}
-                                className="w-full flex items-start gap-8 p-8 md:p-10 text-left transition-all"
+                            <div className="w-1.5 h-1.5 rounded-full bg-brand-primary" />
+                            <span className="text-[10px] font-bold uppercase tracking-widest text-brand-primary font-mono">
+                                FAQ_RESOURCES.v04
+                            </span>
+                        </motion.div>
+                        <h2 className="text-2xl md:text-6xl font-black text-foreground-primary tracking-tighter uppercase font-heading leading-none">
+                            FAQ<span className="text-brand-primary">.</span>
+                        </h2>
+                    </div>
+
+                    {/* FAQ Grid/List */}
+                    <div className="grid grid-cols-1 gap-6">
+                        {FAQS.map((faq, idx) => (
+                            <motion.div
+                                key={idx}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                transition={{ delay: idx * 0.1 }}
+                                className={`group bg-white border border-border-muted/10 rounded-[2.5rem] overflow-hidden transition-all duration-500 ${openIndex === idx
+                                    ? 'shadow-[0_40px_80px_-20px_rgba(0,0,0,0.08)] border-brand-primary/20'
+                                    : 'shadow-[0_10px_30px_-10px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] hover:border-brand-primary/10'
+                                    }`}
                             >
-                                {/* Technical Index */}
-                                <div className="flex flex-col items-center pt-1">
-                                    <span className="text-[10px] font-mono font-black text-gray-300 group-hover:text-brand-primary transition-colors">
-                                        {String(idx + 1).padStart(2, '0')}
-                                    </span>
-                                    <div className={`w-[1px] h-8 bg-gray-100 mt-2 transition-all ${openIndex === idx ? 'h-16 bg-brand-primary' : ''}`} />
-                                </div>
+                                <button
+                                    onClick={() => setOpenIndex(openIndex === idx ? null : idx)}
+                                    className="w-full flex items-center justify-between p-8 md:p-10 text-left"
+                                >
+                                    <div className="flex items-center gap-6">
+                                        <span className={`font-mono text-[10px] font-bold transition-colors ${openIndex === idx ? 'text-brand-primary' : 'text-foreground-muted/40'}`}>
+                                            [{String(idx + 1).padStart(2, '0')}]
+                                        </span>
+                                        <span className={`text-xl md:text-2xl font-black tracking-tighter uppercase font-heading transition-colors ${openIndex === idx ? 'text-brand-primary' : 'text-foreground-primary'}`}>
+                                            {faq.question}
+                                        </span>
+                                    </div>
 
-                                <div className="flex-1 space-y-4">
-                                    <span className="block text-xl md:text-2xl font-black text-foreground-primary group-hover:text-brand-primary transition-colors leading-snug font-heading tracking-tighter uppercase">
-                                        {faq.question}
-                                    </span>
+                                    <div className={`p-3 rounded-full border border-border-default transition-all duration-500 ${openIndex === idx ? 'rotate-180 bg-brand-primary border-brand-primary text-white' : 'group-hover:border-brand-primary/30'}`}>
+                                        <Icon name="chevron-down" size={16} />
+                                    </div>
+                                </button>
 
-                                    <AnimatePresence>
-                                        {openIndex === idx && (
-                                            <motion.div
-                                                {...({
-                                                    initial: { opacity: 0, y: -10 },
-                                                    animate: { opacity: 1, y: 0 },
-                                                    exit: { opacity: 0, y: -10 },
-                                                    transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] }
-                                                } as any)}
-                                                className="overflow-hidden"
-                                            >
-                                                <p className="text-base md:text-lg font-body opacity-60 tracking-tight leading-relaxed max-w-[95%] font-medium">
+                                <AnimatePresence>
+                                    {openIndex === idx && (
+                                        <motion.div
+                                            initial={{ height: 0, opacity: 0 }}
+                                            animate={{ height: 'auto', opacity: 1 }}
+                                            exit={{ height: 0, opacity: 0 }}
+                                            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                                        >
+                                            <div className="px-8 md:px-10 pb-10 flex gap-6">
+                                                <div className="w-px bg-gradient-to-b from-brand-primary/40 to-transparent ml-[1.1rem]" />
+                                                <p className="text-base md:text-lg text-foreground-secondary/70 leading-relaxed font-medium max-w-[85%]">
                                                     {faq.answer}
                                                 </p>
-                                            </motion.div>
-                                        )}
-                                    </AnimatePresence>
-                                </div>
+                                            </div>
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
+                            </motion.div>
+                        ))}
+                    </div>
 
-                                <div className={`mt-1 transition-transform duration-500 ${openIndex === idx ? 'rotate-90 text-brand-primary' : 'text-gray-300'}`}>
-                                    <Icon name="arrowRight" size={24} strokeWidth={3} />
-                                </div>
-                            </button>
-                        </div>
-                    ))}
-
-                    {/* Footer Hardware Status */}
-                    <div className="mt-12 flex items-center justify-between px-8 py-6 border border-gray-100 bg-white shadow-sm">
+                    {/* Footer Status */}
+                    <div className="flex items-center justify-between p-8 bg-brand-primary/5 rounded-[2.5rem] border border-brand-primary/10">
                         <div className="flex items-center gap-4">
                             <div className="flex gap-1">
-                                {[1, 2, 3].map(i => (
+                                {[0, 1, 2].map(i => (
                                     <motion.div
                                         key={i}
-                                        {...({
-                                            animate: { opacity: [0.3, 1, 0.3] },
-                                            transition: { duration: 1.5, repeat: Infinity, delay: i * 0.2 }
-                                        } as any)}
+                                        animate={{ opacity: [0.3, 1, 0.3] }}
+                                        transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.2 }}
                                         className="w-1.5 h-1.5 rounded-full bg-brand-primary"
                                     />
                                 ))}
                             </div>
-                            <span className="text-[9px] font-mono font-black text-gray-400 uppercase tracking-widest">
-                                system_status: resolving_queries
+                            <span className="text-[10px] font-mono font-black text-brand-primary/60 uppercase tracking-widest">
+                                system_status: queries_active
                             </span>
                         </div>
-                        <span className="text-[9px] font-mono font-medium text-gray-300 uppercase tracking-[0.4em]">
-                            UID: {mounted ? Math.random().toString(16).slice(2, 10).toUpperCase() : '--------'}
-                        </span>
+                        <div className="hidden sm:flex items-center gap-2">
+                            <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                            <span className="text-[10px] font-mono font-black text-foreground-muted uppercase tracking-widest">
+                                node_sync: confirmed
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>

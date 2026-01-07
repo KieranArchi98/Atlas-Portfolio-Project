@@ -108,3 +108,12 @@ great, and i like most of this page, but take that pricingfinalcta section and j
 footer
 navbar + sidebar
 logo/icon
+
+
+
+
+
+
+
+
+The goal of this website is to have the visitor say to themselves, 'you did not just have AI create this for you'. that although enabled and guided by AI, it took genuine effort, skill, and creativity to create this website. 

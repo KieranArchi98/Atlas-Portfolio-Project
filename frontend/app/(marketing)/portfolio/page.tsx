@@ -5,7 +5,7 @@ import { Icon } from '@/app/sharedComponents/ui/Icon';
 import { Button } from '@/app/sharedComponents/ui/Button';
 import { AnimatedRitualIcon } from '@/app/sharedComponents/ui/AnimatedRitualIcon';
 import { PortfolioBackground } from '@/app/sharedComponents/effects/PortfolioBackground';
-import { ProjectCard3D } from '@/app/sharedComponents/ui/ProjectCard3D';
+import { ProjectCard3D, ProjectVisualizer } from '@/app/sharedComponents/ui/ProjectCard3D';
 
 interface Project {
     id: string;
@@ -153,99 +153,101 @@ export default function PortfolioPage() {
                         />
 
                         {/* Modal */}
-                        <motion.div
-                            layoutId={`project-${selectedProject.id}`}
-                            initial={{ opacity: 0, scale: 0.9, y: 50 }}
-                            animate={{ opacity: 1, scale: 1, y: 0 }}
-                            exit={{ opacity: 0, scale: 0.9, y: 50 }}
-                            className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none"
-                        >
-                            <div
-                                className="bg-background-primary border border-brand-primary/20 rounded-2xl shadow-2xl w-[95%] md:w-[90%] lg:w-[85%] xl:w-[75%] 2xl:w-[65%] max-h-[90vh] overflow-y-auto pointer-events-auto relative"
+                        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none">
+                            <motion.div
+                                initial={{ opacity: 0, scale: 0.95 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                exit={{ opacity: 0, scale: 0.98 }}
+                                transition={{ duration: 0.15, ease: "easeOut" }}
+                                className="w-full h-full flex items-center justify-center"
                             >
-                                {/* Modal Header / Close */}
-                                <button
-                                    onClick={() => setSelectedProject(null)}
-                                    className="absolute top-4 right-4 p-2 bg-background-primary/50 hover:bg-brand-primary/20 text-foreground-primary rounded-full transition-colors z-20"
+                                <div
+                                    className="bg-background-primary border border-brand-primary/20 rounded-2xl shadow-2xl w-[95%] md:w-[90%] lg:w-[85%] xl:w-[75%] 2xl:w-[65%] max-h-[90vh] overflow-y-auto pointer-events-auto relative"
                                 >
-                                    <Icon name="close" size={24} />
-                                </button>
+                                    {/* Modal Header / Close */}
+                                    <button
+                                        onClick={() => setSelectedProject(null)}
+                                        className="absolute top-4 right-4 p-2 bg-background-primary/50 hover:bg-brand-primary/20 text-foreground-primary rounded-full transition-colors z-20"
+                                    >
+                                        <Icon name="close" size={24} />
+                                    </button>
 
-                                <div className="grid grid-cols-1 lg:grid-cols-2 h-full">
-                                    {/* Left: Visual */}
-                                    <div className="relative h-64 lg:h-auto bg-brand-primary/5 flex items-center justify-center overflow-hidden border-b lg:border-b-0 lg:border-r border-border-default">
-                                        <div className="absolute inset-0 opacity-30 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-brand-primary/20 via-transparent to-transparent" />
+                                    <div className="grid grid-cols-1 lg:grid-cols-2 h-full">
+                                        {/* Left: Visual */}
+                                        <div className="relative h-64 lg:h-auto bg-brand-primary/5 flex items-center justify-center overflow-hidden border-b lg:border-b-0 lg:border-r border-border-default">
+                                            <div className="absolute inset-0 opacity-30 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-brand-primary/20 via-transparent to-transparent" />
 
-                                        {selectedProject.image && !selectedProject.image.includes('placeholder') ? (
-                                            <img
-                                                src={selectedProject.image}
-                                                alt={selectedProject.name}
-                                                className="absolute inset-0 w-full h-full object-cover opacity-80"
-                                            />
-                                        ) : (
-                                            <div className="relative z-10 text-brand-primary/30 w-full h-full">
-                                                <ProjectVisualizer id={selectedProject.id} />
-                                            </div>
-                                        )}
-                                    </div>
-
-                                    {/* Right: Content */}
-                                    <div className="p-8 lg:p-12 space-y-8 bg-background-primary/30 backdrop-blur-sm">
-                                        <div>
-                                            <h2 className="text-3xl lg:text-4xl font-bold text-foreground-primary mb-2 font-mono uppercase tracking-tight">
-                                                {selectedProject.name}
-                                            </h2>
-                                            <div className="h-1 w-20 bg-brand-primary/50 rounded-full" />
+                                            {selectedProject.image && !selectedProject.image.includes('placeholder') ? (
+                                                <img
+                                                    src={selectedProject.image}
+                                                    alt={selectedProject.name}
+                                                    className="absolute inset-0 w-full h-full object-cover opacity-80"
+                                                />
+                                            ) : (
+                                                <div className="relative z-10 text-brand-primary/30 w-full h-full">
+                                                    <ProjectVisualizer id={selectedProject.id} />
+                                                </div>
+                                            )}
                                         </div>
 
-                                        <p className="text-foreground-secondary text-lg leading-relaxed">
-                                            {selectedProject.longDescription}
-                                        </p>
-
-                                        <div>
-                                            <h3 className="text-sm font-bold text-brand-primary uppercase tracking-widest mb-4">Stack</h3>
-                                            <div className="flex flex-wrap gap-2">
-                                                {selectedProject.technologies.map((tech) => (
-                                                    <span
-                                                        key={tech}
-                                                        className="px-3 py-1 bg-brand-primary/5 border border-brand-primary/20 text-brand-primary text-xs font-medium rounded-full"
-                                                    >
-                                                        {tech}
-                                                    </span>
-                                                ))}
+                                        {/* Right: Content */}
+                                        <div className="p-8 lg:p-12 space-y-8 bg-background-primary/30 backdrop-blur-sm">
+                                            <div>
+                                                <h2 className="text-3xl lg:text-4xl font-bold text-foreground-primary mb-2 font-mono uppercase tracking-tight">
+                                                    {selectedProject.name}
+                                                </h2>
+                                                <div className="h-1 w-20 bg-brand-primary/50 rounded-full" />
                                             </div>
-                                        </div>
 
-                                        <div className="flex gap-4 pt-4 border-t border-border-default">
-                                            <a
-                                                href={selectedProject.githubUrl}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="flex-1"
-                                            >
-                                                <Button variant="outline" className="w-full gap-2 transition-all hover:border-brand-primary hover:text-brand-primary group">
-                                                    <Icon name="code" size={20} className="group-hover:scale-110 transition-transform" />
-                                                    View Code
-                                                </Button>
-                                            </a>
-                                            {selectedProject.liveUrl && (
+                                            <p className="text-foreground-secondary text-lg leading-relaxed">
+                                                {selectedProject.longDescription}
+                                            </p>
+
+                                            <div>
+                                                <h3 className="text-sm font-bold text-brand-primary uppercase tracking-widest mb-4">Stack</h3>
+                                                <div className="flex flex-wrap gap-2">
+                                                    {selectedProject.technologies.map((tech) => (
+                                                        <span
+                                                            key={tech}
+                                                            className="px-3 py-1 bg-brand-primary/5 border border-brand-primary/20 text-brand-primary text-xs font-medium rounded-full"
+                                                        >
+                                                            {tech}
+                                                        </span>
+                                                    ))}
+                                                </div>
+                                            </div>
+
+                                            <div className="flex gap-4 pt-4 border-t border-border-default">
                                                 <a
-                                                    href={selectedProject.liveUrl}
+                                                    href={selectedProject.githubUrl}
                                                     target="_blank"
                                                     rel="noopener noreferrer"
                                                     className="flex-1"
                                                 >
-                                                    <Button variant="primary" className="w-full gap-2 group">
-                                                        <Icon name="visible" size={20} className="group-hover:translate-x-1 transition-transform" />
-                                                        Live Demo
+                                                    <Button variant="outline" className="w-full gap-2 transition-all hover:border-brand-primary hover:text-brand-primary group">
+                                                        <Icon name="code" size={20} className="group-hover:scale-110 transition-transform" />
+                                                        View Code
                                                     </Button>
                                                 </a>
-                                            )}
+                                                {selectedProject.liveUrl && (
+                                                    <a
+                                                        href={selectedProject.liveUrl}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="flex-1"
+                                                    >
+                                                        <Button variant="primary" className="w-full gap-2 group">
+                                                            <Icon name="visible" size={20} className="group-hover:translate-x-1 transition-transform" />
+                                                            Live Demo
+                                                        </Button>
+                                                    </a>
+                                                )}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </motion.div>
+                            </motion.div>
+                        </div>
                     </>
                 )}
             </AnimatePresence>

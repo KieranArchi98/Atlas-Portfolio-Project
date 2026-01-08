@@ -19,12 +19,12 @@ interface ProjectCard3DProps {
     index: number;
 }
 
-const ProjectVisualizer = ({ id }: { id: string }) => {
+export const ProjectVisualizer = ({ id }: { id: string }) => {
     switch (id) {
         case 'konnect':
             return (
                 <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
-                    <svg className="w-full h-full opacity-40" viewBox="0 0 200 200">
+                    <svg className="w-full h-full opacity-80" viewBox="0 0 200 200">
                         {/* Agentic Nodes */}
                         <g className="animate-pulse">
                             <circle cx="100" cy="60" r="10" fill="none" stroke="currentColor" strokeWidth="0.5" />
@@ -48,7 +48,7 @@ const ProjectVisualizer = ({ id }: { id: string }) => {
         case 'gemini-ai':
             return (
                 <div className="absolute inset-0 flex items-center justify-center p-6 overflow-hidden">
-                    <div className="w-full h-full flex flex-col justify-between opacity-40">
+                    <div className="w-full h-full flex flex-col justify-between opacity-80">
                         <div className="flex justify-between items-center text-[6px] font-mono">
                             <span>PIPELINE_STATUS: ACTIVE</span>
                             <span className="animate-pulse">● RUNNING</span>
@@ -74,7 +74,7 @@ const ProjectVisualizer = ({ id }: { id: string }) => {
         case 'netdoctor':
             return (
                 <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
-                    <svg className="w-full h-full opacity-40" viewBox="0 0 200 200">
+                    <svg className="w-full h-full opacity-80" viewBox="0 0 200 200">
                         <circle cx="100" cy="100" r="4" fill="currentColor" />
                         <circle cx="100" cy="100" r="30" stroke="currentColor" fill="none" strokeWidth="0.5" strokeDasharray="4 4">
                             <animateTransform attributeName="transform" type="rotate" from="0 100 100" to="360 100 100" dur="20s" repeatCount="indefinite" />
@@ -100,7 +100,7 @@ const ProjectVisualizer = ({ id }: { id: string }) => {
             );
         case 'powershell-toolkit':
             return (
-                <div className="absolute inset-0 flex items-center justify-center p-8 overflow-hidden font-mono text-[8px] opacity-30 select-none pointer-events-none">
+                <div className="absolute inset-0 flex items-center justify-center p-8 overflow-hidden font-mono text-[8px] opacity-70 select-none pointer-events-none">
                     <div className="w-full h-full border border-current rounded p-2 flex flex-col gap-1 overflow-hidden relative">
                         <div className="text-[10px] font-bold border-b border-current pb-1 mb-1 animate-pulse">TERMINAL: AD_AUDIT_V2.PS1</div>
                         <div className="flex flex-col gap-1">
@@ -119,7 +119,7 @@ const ProjectVisualizer = ({ id }: { id: string }) => {
         case 'cosmic-miner':
             return (
                 <div className="absolute inset-0 flex items-center justify-center overflow-hidden scale-110">
-                    <svg className="w-full h-full opacity-40" viewBox="0 0 200 200">
+                    <svg className="w-full h-full opacity-80" viewBox="0 0 200 200">
                         <circle cx="100" cy="100" r="8" fill="currentColor">
                             <animate attributeName="r" values="7;9;7" dur="4s" repeatCount="indefinite" />
                         </circle>
@@ -134,7 +134,7 @@ const ProjectVisualizer = ({ id }: { id: string }) => {
         case 'harbor':
             return (
                 <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
-                    <svg className="w-full h-full opacity-30" viewBox="0 0 200 200">
+                    <svg className="w-full h-full opacity-70" viewBox="0 0 200 200">
                         {[...Array(4)].map((_, i) => (
                             <path key={i} d={`M 0 ${100 + i * 15} Q 50 ${80 + i * 15} 100 ${100 + i * 15} T 200 ${100 + i * 15}`} fill="none" stroke="currentColor" strokeWidth="0.5">
                                 <animate attributeName="d" dur={`${4 + i}s`} repeatCount="indefinite"
@@ -149,7 +149,7 @@ const ProjectVisualizer = ({ id }: { id: string }) => {
         case 'packet-tracer':
             return (
                 <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
-                    <svg className="w-full h-full opacity-30" viewBox="0 0 200 200">
+                    <svg className="w-full h-full opacity-70" viewBox="0 0 200 200">
                         {/* Blueprint Grid Grid */}
                         <path d="M 0 50 L 200 50 M 0 100 L 200 100 M 0 150 L 200 150 M 50 0 L 50 200 M 100 0 L 100 200 M 150 0 L 150 200" stroke="currentColor" strokeWidth="0.2" fill="none" opacity="0.2" />
                         {/* Network Topology */}
@@ -164,7 +164,7 @@ const ProjectVisualizer = ({ id }: { id: string }) => {
         case 'ad-dc-environment':
             return (
                 <div className="absolute inset-0 flex items-center justify-center p-6 overflow-hidden">
-                    <div className="w-full h-full border-[0.5px] border-current opacity-30 flex flex-col font-mono text-[6px] p-2">
+                    <div className="w-full h-full border-[0.5px] border-current opacity-70 flex flex-col font-mono text-[6px] p-2">
                         <div className="mb-2 border-b border-current pb-1">DOMAIN: ATLAS_CORP.LOCAL</div>
                         <div className="flex-1 flex gap-4">
                             <div className="flex-1 border border-current p-1 flex flex-col gap-1">
@@ -184,7 +184,7 @@ const ProjectVisualizer = ({ id }: { id: string }) => {
         case 'project-x':
             return (
                 <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
-                    <svg className="w-full h-full opacity-30" viewBox="0 0 200 200">
+                    <svg className="w-full h-full opacity-70" viewBox="0 0 200 200">
                         {/* Encrypted Data Stream */}
                         {[...Array(10)].map((_, i) => (
                             <text key={i} x="10" y={20 + i * 18} fill="currentColor" fontSize="8" className="font-mono opacity-20">
@@ -242,6 +242,7 @@ export function ProjectCard3D({ project, onClick, index }: ProjectCard3DProps) {
     return (
         <motion.div
             ref={ref}
+            layoutId={`project-card-${project.id}`}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
             initial={{ opacity: 0, y: 50 }}
@@ -281,7 +282,7 @@ export function ProjectCard3D({ project, onClick, index }: ProjectCard3DProps) {
 
                     {!project.image || project.image.includes('placeholder') ? (
                         <motion.div
-                            className="relative z-10 text-brand-primary/40 group-hover:text-brand-primary transition-colors duration-300 w-full h-full flex items-center justify-center"
+                            className="relative z-10 text-brand-primary/80 group-hover:text-brand-primary transition-colors duration-300 w-full h-full flex items-center justify-center"
                             style={{ transform: "translateZ(20px)" }}
                         >
                             <ProjectVisualizer id={project.id} />

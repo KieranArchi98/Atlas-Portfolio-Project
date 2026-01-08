@@ -14,8 +14,9 @@ const ISO_PLATFORM_STYLE = "relative w-40 h-40 transform-style-3d";
 // Full Stack: Terminal & floating UI layers
 export function WebVisual3D() {
     return (
-        <div className={ISO_CONTAINER_STYLE}>
+        <div className="relative w-full h-80 flex items-center justify-center perspective-1000">
             <motion.div
+                style={{ scale: 1.25 }}
                 className={ISO_PLATFORM_STYLE}
                 initial={{ rotateX: 60, rotateZ: 35 }}
                 whileInView={{ rotateX: 55, rotateZ: 30 }}
@@ -80,8 +81,9 @@ export function WebVisual3D() {
 // Cloud & Network: Orbital Data Hub
 export function NetArchVisual3D() {
     return (
-        <div className={ISO_CONTAINER_STYLE}>
+        <div className="relative w-full h-80 flex items-center justify-center perspective-1000">
             <motion.div
+                style={{ scale: 1.5 }}
                 className={ISO_PLATFORM_STYLE}
                 initial={{ rotateX: 60, rotateZ: 0 }}
                 animate={{ rotateZ: 360 }}
@@ -128,8 +130,9 @@ export function NetArchVisual3D() {
 // Tech Ops: Diagnostic & Hardware Panel
 export function MobileVisual3D() {
     return (
-        <div className={ISO_CONTAINER_STYLE}>
+        <div className="relative w-full h-80 flex items-center justify-center perspective-1000">
             <motion.div
+                style={{ scale: 1.25 }}
                 className={ISO_PLATFORM_STYLE}
                 initial={{ rotateX: 60, rotateZ: 45 }}
             >
@@ -195,8 +198,9 @@ export function MobileVisual3D() {
 // AI: Neural Nexus
 export function AiVisual3D() {
     return (
-        <div className={ISO_CONTAINER_STYLE}>
+        <div className="relative w-full h-80 flex items-center justify-center perspective-1000">
             <motion.div
+                style={{ scale: 1.5 }}
                 className={ISO_PLATFORM_STYLE}
                 initial={{ rotateX: 60, rotateZ: 45 }}
                 animate={{ rotateZ: 50 }}

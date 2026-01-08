@@ -47,6 +47,7 @@ export default function ProductPage() {
         ]}
       />
 
+
       {/* Testimonials Section */}
       <Testimonials />
 

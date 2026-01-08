@@ -67,15 +67,6 @@ export function PricingFeatures() {
         <section className="py-24 bg-background-primary relative overflow-hidden">
             <div className="w-full px-6 md:px-12 lg:px-16 relative z-10">
 
-                <div className="text-center w-full mb-16">
-                    <h2 className="text-3xl md:text-4xl font-bold text-foreground-primary mb-4">
-                        Everything You Need to Scale
-                    </h2>
-                    <p className="text-foreground-secondary">
-                        Beyond just code. A complete delivery package ensuring long-term viability and independence.
-                    </p>
-                </div>
-
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
                     {FEATURES.map((feature, idx) => (
                         <motion.div
@@ -84,9 +75,14 @@ export function PricingFeatures() {
                                 initial: { opacity: 0, y: 20 },
                                 whileInView: { opacity: 1, y: 0 },
                                 viewport: { once: true, margin: "-50px" },
-                                transition: { delay: feature.delay, duration: 0.5 },
+                                transition: {
+                                    delay: feature.delay,
+                                    duration: 0.5,
+                                    scale: { type: "spring", stiffness: 300, damping: 20 }
+                                },
                             } as any)}
-                            className={`${feature.colSpan} group relative bg-surface-primary border border-border-default rounded-2xl p-8 overflow-hidden hover:border-brand-primary/30 transition-colors`}
+                            whileHover={{ scale: 1.05, zIndex: 10 }}
+                            className={`${feature.colSpan} group relative bg-surface-primary border border-border-default rounded-2xl p-8 transition-colors hover:border-brand-primary/30 shadow-sm hover:shadow-xl`}
                         >
                             {/* Hover Glow */}
                             <div className={`absolute -right-12 -top-12 w-32 h-32 rounded-full ${feature.color} opacity-10 blur-3xl group-hover:opacity-20 transition-opacity`} />

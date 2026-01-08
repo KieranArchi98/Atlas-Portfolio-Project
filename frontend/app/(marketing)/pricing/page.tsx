@@ -7,8 +7,8 @@ export default function PricingPage() {
   return (
     <div className="bg-white">
       <PricingTable
-        icon="settings"
-        title="Services"
+        icon="trending-up"
+        title="Dynamic Pricing"
         subtitle="Operational baselines for professional engagement and technical consultation."
         plans={[
           {

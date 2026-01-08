@@ -33,25 +33,25 @@ export function TechnicalSynchronizer({ modules, visualComponent: VisualComponen
                 {/* SVG Connecting Lines - Hidden on very small mobile for clarity if needed, but keeping for now */}
                 <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 1000 800" preserveAspectRatio="none" fill="none">
                     <motion.path
-                        d="M 200 200 L 400 375"
+                        d="M 100 100 L 500 480"
                         stroke="url(#lineGradient)"
                         strokeWidth="1.5"
                         style={{ pathLength } as any}
                     />
                     <motion.path
-                        d="M 800 200 L 600 375"
+                        d="M 900 100 L 500 480"
                         stroke="url(#lineGradient)"
                         strokeWidth="1.5"
                         style={{ pathLength } as any}
                     />
                     <motion.path
-                        d="M 200 600 L 400 425"
+                        d="M 100 700 L 500 480"
                         stroke="url(#lineGradient)"
                         strokeWidth="1.5"
                         style={{ pathLength } as any}
                     />
                     <motion.path
-                        d="M 800 600 L 600 425"
+                        d="M 900 700 L 500 480"
                         stroke="url(#lineGradient)"
                         strokeWidth="1.5"
                         style={{ pathLength } as any}
@@ -99,7 +99,7 @@ export function TechnicalSynchronizer({ modules, visualComponent: VisualComponen
                         </div>
 
                         {/* Description Reveal Area */}
-                        <div className="absolute -bottom-24 sm:-bottom-40 left-1/2 -translate-x-1/2 w-[90vw] sm:w-[80%] lg:w-[50%] text-center translate-y-[100px]">
+                        <div className="absolute -bottom-24 sm:-bottom-48 left-1/2 -translate-x-1/2 w-[90vw] sm:w-[80%] lg:w-[50%] text-center translate-y-[130px]">
                             <AnimatePresence mode="wait">
                                 <motion.div
                                     key={activeIndex}
@@ -117,7 +117,7 @@ export function TechnicalSynchronizer({ modules, visualComponent: VisualComponen
                                             {modules[activeIndex].title}
                                         </h4>
                                     </div>
-                                    <p className="text-[13px] sm:text-[16px] text-foreground-secondary font-mono leading-relaxed px-4 opacity-90">
+                                    <p className="text-[15px] sm:text-[19px] text-foreground-secondary font-mono leading-relaxed px-4 opacity-90">
                                         {modules[activeIndex].description}
                                     </p>
                                     <div className="flex justify-center gap-4 pt-2">

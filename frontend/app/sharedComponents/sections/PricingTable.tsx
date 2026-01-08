@@ -82,11 +82,11 @@ export function PricingTable({ icon, title, subtitle, plans }: PricingTableProps
 
     return (
         <section className="py-24 relative overflow-hidden bg-white">
-            <div className="w-full md:w-[95%] lg:w-[90%] xl:w-[85%] 2xl:w-[80%] mx-auto px-4 md:px-6 relative z-10">
-                <div className="grid grid-cols-1 xl:grid-cols-12 gap-12 lg:gap-16">
+            <div className="w-full md:w-[95%] lg:w-[90%] min-[1330px]:w-[85%] 2xl:w-[80%] mx-auto px-4 md:px-6 relative z-10">
+                <div className="grid grid-cols-1 min-[1330px]:grid-cols-12 gap-12 lg:gap-16">
 
                     {/* Left Sidebar: Introduction */}
-                    <div className="xl:col-span-4 xl:sticky xl:top-32 h-fit space-y-12 order-1">
+                    <div className="min-[1330px]:col-span-4 min-[1330px]:sticky min-[1330px]:top-32 h-fit space-y-12 order-1">
                         <div className="space-y-6">
                             <motion.div
                                 initial={{ opacity: 0, x: -20 }}
@@ -102,9 +102,54 @@ export function PricingTable({ icon, title, subtitle, plans }: PricingTableProps
                             </motion.div>
 
                             <div className="flex flex-row items-center justify-between gap-4">
-                                <h2 className="text-3xl md:text-5xl lg:text-7xl font-black text-foreground-primary tracking-tighter uppercase font-heading leading-[0.85]">
-                                    {title}
-                                </h2>
+                                <div className="relative group overflow-visible">
+                                    {/* Main Title Background Shadow for Depth */}
+                                    <div className="absolute inset-0 translate-x-[2px] translate-y-[2px] opacity-10 select-none pointer-events-none uppercase font-heading text-4xl md:text-5xl lg:text-8xl font-black tracking-[-0.1em] blur-[2px]">
+                                        {title}
+                                    </div>
+
+                                    <motion.h2
+                                        initial={{ opacity: 0 }}
+                                        whileInView={{ opacity: 1 }}
+                                        transition={{ duration: 0.1 }}
+                                        className="text-4xl md:text-5xl lg:text-8xl font-black text-foreground-primary tracking-[-0.1em] uppercase font-heading leading-[0.85] relative z-20"
+                                    >
+                                        {title}
+                                    </motion.h2>
+
+                                    {/* Digital Slices (Glitch Layers) */}
+                                    {[...Array(4)].map((_, i) => (
+                                        <motion.div
+                                            key={`slice-${i}`}
+                                            initial={{ opacity: 0, x: 0 }}
+                                            whileInView={{
+                                                opacity: [0, 1, 0, 1, 0],
+                                                x: [0, (i % 2 === 0 ? 10 : -10), 0, (i % 2 === 0 ? -5 : 5), 0],
+                                            }}
+                                            transition={{
+                                                duration: 0.8,
+                                                delay: 0.1 * i,
+                                                times: [0, 0.2, 0.4, 0.6, 1],
+                                                ease: "linear"
+                                            }}
+                                            className="absolute inset-0 text-brand-primary/40 select-none pointer-events-none z-10 text-4xl md:text-5xl lg:text-8xl font-black tracking-[-0.1em] uppercase font-heading leading-[0.85]"
+                                            style={{
+                                                clipPath: `inset(${i * 25}% 0 ${(3 - i) * 25}% 0)`,
+                                            }}
+                                            aria-hidden="true"
+                                        >
+                                            {title}
+                                        </motion.div>
+                                    ))}
+
+                                    {/* Fragmented Scanning Line */}
+                                    <motion.div
+                                        initial={{ top: "-10%", opacity: 0 }}
+                                        whileInView={{ top: "110%", opacity: [0, 1, 0] }}
+                                        transition={{ duration: 1.2, delay: 0.3, ease: "easeInOut" }}
+                                        className="absolute left-[-10%] right-[-10%] h-[2px] bg-gradient-to-r from-transparent via-brand-primary to-transparent z-30 blur-[1px]"
+                                    />
+                                </div>
 
                                 {/* TELEMETRY GRAPHIC */}
                                 <div className="flex items-center gap-4 h-16 md:h-20 shrink-0">
@@ -153,14 +198,14 @@ export function PricingTable({ icon, title, subtitle, plans }: PricingTableProps
                             </div>
 
                             {subtitle && (
-                                <p className="text-base md:text-lg font-body opacity-60 tracking-tight leading-relaxed xl:w-[90%] font-medium">
+                                <p className="text-base md:text-lg font-body opacity-60 tracking-tight leading-relaxed min-[1330px]:w-[90%] font-medium">
                                     {subtitle}
                                 </p>
                             )}
                         </div>
 
                         {/* Mobile Navigation Pills (Above carousel) */}
-                        <div className="xl:hidden space-y-6 pt-8">
+                        <div className="min-[1330px]:hidden space-y-6 pt-8">
                             <div className="flex bg-background-secondary/50 p-1 rounded-xl border border-border-default overflow-hidden relative">
                                 {plans.map((plan, i) => (
                                     <button
@@ -188,7 +233,7 @@ export function PricingTable({ icon, title, subtitle, plans }: PricingTableProps
                         </div>
 
                         {/* Desktop Pagination Interface */}
-                        <div className="hidden xl:flex items-center gap-4 pt-12">
+                        <div className="hidden min-[1330px]:flex items-center gap-4 pt-12">
                             <div className="flex gap-2">
                                 {plans.map((_, i) => (
                                     <button
@@ -202,10 +247,10 @@ export function PricingTable({ icon, title, subtitle, plans }: PricingTableProps
                     </div>
 
                     {/* Right Side: Plans Content */}
-                    <div className="xl:col-span-8 order-2 relative">
+                    <div className="min-[1330px]:col-span-8 order-2 relative">
 
                         {/* Mobile Navigation Arrows (Flanking) */}
-                        <div className="xl:hidden absolute top-1/2 -left-2 -right-2 -translate-y-1/2 flex justify-between pointer-events-none z-30">
+                        <div className="min-[1330px]:hidden absolute top-1/2 -left-2 -right-2 -translate-y-1/2 flex justify-between pointer-events-none z-30">
                             <button
                                 onClick={prevSlide}
                                 disabled={activeSlide === 0}
@@ -226,7 +271,7 @@ export function PricingTable({ icon, title, subtitle, plans }: PricingTableProps
                         <div
                             ref={scrollRef}
                             onScroll={handleScroll}
-                            className="flex xl:grid xl:grid-cols-3 gap-6 overflow-x-auto pb-8 xl:pb-0 scrollbar-hide snap-x snap-mandatory overflow-y-hidden px-4 xl:px-0"
+                            className="flex min-[1330px]:grid min-[1330px]:grid-cols-3 gap-6 overflow-x-auto pb-8 min-[1330px]:pb-0 scrollbar-hide snap-x snap-mandatory overflow-y-hidden px-4 min-[1330px]:px-0"
                             style={{ msOverflowStyle: 'none', scrollbarWidth: 'none' }}
                         >
                             <style jsx>{`
@@ -241,7 +286,7 @@ export function PricingTable({ icon, title, subtitle, plans }: PricingTableProps
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ delay: idx * 0.1, duration: 0.8 }}
-                                    className="min-w-[100%] xl:min-w-0 h-full flex flex-col snap-center shrink-0 xl:shrink"
+                                    className="min-w-[100%] min-[1330px]:min-w-0 h-full flex flex-col snap-center shrink-0 min-[1330px]:shrink"
                                 >
                                     <div
                                         className={`h-full relative flex flex-col gap-10 w-full p-8 lg:p-10 rounded-[2.5rem] border transition-all duration-700 overflow-hidden group ${plan.isPopular
@@ -298,7 +343,7 @@ export function PricingTable({ icon, title, subtitle, plans }: PricingTableProps
                         </div>
 
                         {/* Pagination dots for mobile */}
-                        <div className="xl:hidden flex justify-center gap-2 mt-4">
+                        <div className="min-[1330px]:hidden flex justify-center gap-2 mt-4">
                             {plans.map((_, i) => (
                                 <button
                                     key={i}

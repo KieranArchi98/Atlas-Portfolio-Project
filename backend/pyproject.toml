@@ -1,0 +1,26 @@
+[project]
+name = "atlas-portfolio-backend"
+version = "0.1.0"
+description = "FastAPI backend for Atlas Portfolio"
+dependencies = [
+    "fastapi",
+    "uvicorn[standard]",
+    "motor",
+    "beanie",
+    "pydantic[email]",
+    "pydantic-settings",
+    "python-jose[cryptography]",
+    "passlib[bcrypt]",
+    "python-multipart",
+    "python-dotenv",
+]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[tool.ruff]
+select = ["E", "F", "I"]
+fixable = ["ALL"]
+exclude = [".git", "__pycache__", "build", "dist"]
+line-length = 88

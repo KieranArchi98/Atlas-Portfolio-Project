@@ -423,12 +423,22 @@ const OrbitalNode = ({ title, value, detail, orbitConfig, graphic }: any) => {
                     className="absolute top-0 left-1/2 pointer-events-auto cursor-pointer"
                     style={{ transform: 'translate(-50%, -50%)' }}
                 >
-                    <div
+                    <motion.div
+                        animate={isHovered ? { y: 0, x: 0, rotate: 0 } : {
+                            y: [0, -8, 0],
+                            x: [0, 4, 0],
+                            rotate: [0, 1, 0, -1, 0]
+                        } as any}
+                        transition={{
+                            duration: 5 + orbitConfig.id,
+                            repeat: Infinity,
+                            ease: "easeInOut"
+                        }}
                         style={{
                             animation: `counter-orbit-${orbitConfig.id} ${orbitConfig.speed}s linear infinite`,
                             animationPlayState: isHovered ? 'paused' : 'running',
                             willChange: 'transform'
-                        }}
+                        } as any}
                     >
                         <motion.div
                             whileHover={{ scale: 1.02 }}
@@ -457,7 +467,7 @@ const OrbitalNode = ({ title, value, detail, orbitConfig, graphic }: any) => {
                                 </div>
                             )}
                         </motion.div>
-                    </div>
+                    </motion.div>
                 </div>
             </div>
 
@@ -478,12 +488,22 @@ const OrbitalNode = ({ title, value, detail, orbitConfig, graphic }: any) => {
                     className="absolute top-0 left-1/2 pointer-events-auto cursor-pointer"
                     style={{ transform: 'translate(-50%, -50%)' }}
                 >
-                    <div
+                    <motion.div
+                        animate={isHovered ? { y: 0, x: 0, rotate: 0 } : {
+                            y: [0, -12, 0],
+                            x: [0, 6, 0],
+                            rotate: [0, 1.5, 0, -1.5, 0]
+                        } as any}
+                        transition={{
+                            duration: 6 + orbitConfig.id,
+                            repeat: Infinity,
+                            ease: "easeInOut"
+                        }}
                         style={{
                             animation: `counter-orbit-${orbitConfig.id} ${orbitConfig.speed}s linear infinite`,
                             animationPlayState: isHovered ? 'paused' : 'running',
                             willChange: 'transform'
-                        }}
+                        } as any}
                     >
                         <motion.div
                             whileHover={{ scale: 1.02 }}
@@ -512,7 +532,7 @@ const OrbitalNode = ({ title, value, detail, orbitConfig, graphic }: any) => {
                                 </div>
                             )}
                         </motion.div>
-                    </div>
+                    </motion.div>
                 </div>
             </div>
         </div>
@@ -546,7 +566,7 @@ export function PricingFinalCTA() {
                 id: 0,
                 radiusMobile: 140,
                 radiusDesktop: 180,
-                speed: 60,
+                speed: 80, // Synchronized speed
                 offset: 0
             }
         },
@@ -560,7 +580,7 @@ export function PricingFinalCTA() {
                 id: 1,
                 radiusMobile: 210,
                 radiusDesktop: 280,
-                speed: 80,
+                speed: 80, // Synchronized speed
                 offset: 90
             }
         },
@@ -574,7 +594,7 @@ export function PricingFinalCTA() {
                 id: 2,
                 radiusMobile: 280,
                 radiusDesktop: 380,
-                speed: 100,
+                speed: 80, // Synchronized speed
                 offset: 180
             }
         },
@@ -588,7 +608,7 @@ export function PricingFinalCTA() {
                 id: 3,
                 radiusMobile: 350,
                 radiusDesktop: 480,
-                speed: 120,
+                speed: 80, // Synchronized speed
                 offset: 270
             }
         },

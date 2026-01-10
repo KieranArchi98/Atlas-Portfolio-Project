@@ -103,6 +103,127 @@ const ActiveShield = () => (
     </div>
 );
 
+const NetworkingPlanet = () => (
+    <div className="relative w-10 h-10 flex items-center justify-center">
+        {/* Core Sphere */}
+        <div className="absolute w-6 h-6 rounded-full border border-brand-primary/20 bg-brand-primary/5">
+            <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at 30% 30%, white, transparent)' }} />
+            {/* Inner Grid */}
+            <div className="absolute inset-0 rounded-full overflow-hidden opacity-30">
+                <div className="absolute inset-0" style={{ backgroundImage: 'linear-gradient(90deg, var(--color-brand-primary) 1px, transparent 1px), linear-gradient(var(--color-brand-primary) 1px, transparent 1px)', backgroundSize: '4px 4px' }} />
+            </div>
+        </div>
+        {/* Orbiting Packets */}
+        {[0, 1, 2].map((i) => (
+            <motion.div
+                key={i}
+                animate={{ rotate: 360 }}
+                transition={{ duration: 3 + i, repeat: Infinity, ease: "linear" }}
+                className="absolute inset-[-4px]"
+            >
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1 h-1 bg-brand-primary rounded-full shadow-[0_0_8px_var(--color-brand-primary)]" />
+            </motion.div>
+        ))}
+        {/* Connection Pulsing */}
+        <motion.div
+            animate={{ scale: [1, 1.5, 1], opacity: [0.3, 0, 0.3] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="absolute inset-0 border border-brand-primary/40 rounded-full"
+        />
+    </div>
+);
+
+const CloudPlanet = () => (
+    <div className="relative w-10 h-10 flex items-center justify-center">
+        {/* Soft Atmosphere */}
+        <motion.div
+            animate={{ scale: [1, 1.1, 1], opacity: [0.2, 0.4, 0.2] }}
+            transition={{ duration: 4, repeat: Infinity }}
+            className="absolute inset-0 rounded-full bg-brand-primary/20 blur-md"
+        />
+        {/* Planet Body */}
+        <div className="relative w-7 h-7 bg-white border border-brand-primary/10 rounded-full overflow-hidden shadow-inner">
+            <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/[0.05] to-brand-primary/[0.15]" />
+            {/* Drifting Clouds */}
+            {[0, 1, 2].map(i => (
+                <motion.div
+                    key={i}
+                    animate={{ x: [-20, 40], opacity: [0, 0.8, 0] }}
+                    transition={{ duration: 5 + i * 2, repeat: Infinity, delay: i * 1.5 }}
+                    className="absolute h-2 bg-white/40 blur-[2px] rounded-full"
+                    style={{
+                        top: `${20 + i * 25}%`,
+                        width: `${30 + i * 10}%`,
+                        left: '-20%'
+                    }}
+                />
+            ))}
+        </div>
+        {/* System Ring */}
+        <div className="absolute inset-[-2px] border border-brand-primary/20 rounded-full" style={{ transform: 'rotateX(75deg)' }} />
+    </div>
+);
+
+const SoftwarePlanet = () => (
+    <div className="relative w-10 h-10 flex items-center justify-center">
+        {/* Digital Aura */}
+        <motion.div
+            animate={{ scale: [0.8, 1.2, 0.8], opacity: [0.1, 0.3, 0.1] }}
+            transition={{ duration: 3, repeat: Infinity }}
+            className="absolute inset-0 bg-brand-primary/10 rounded-full blur-xl"
+        />
+        {/* Data Orb */}
+        <div className="relative w-7 h-7 bg-white border border-brand-primary/20 rounded-full overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/[0.02] to-brand-primary/[0.08]" />
+            {/* Binary Stream */}
+            <motion.div
+                animate={{ y: [-20, 20] }}
+                transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                className="absolute inset-0 opacity-10 flex flex-col items-center text-[4px] font-mono leading-none text-brand-primary"
+            >
+                <div>0101</div>
+                <div>1010</div>
+                <div>0011</div>
+                <div>1100</div>
+                <div>0101</div>
+            </motion.div>
+        </div>
+        {/* Orbiting Bit */}
+        <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+            className="absolute inset-[-4px]"
+        >
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-brand-primary/20 border border-brand-primary/40 rotate-45" />
+        </motion.div>
+    </div>
+);
+
+const SupportPlanet = () => (
+    <div className="relative w-10 h-10 flex items-center justify-center">
+        {/* Signal Waves */}
+        {[0, 1, 2].map(i => (
+            <motion.div
+                key={i}
+                initial={{ scale: 0.5, opacity: 0 }}
+                animate={{ scale: [0.5, 2], opacity: [0.5, 0] }}
+                transition={{ duration: 2, repeat: Infinity, delay: i * 0.6 }}
+                className="absolute inset-0 border border-brand-primary/30 rounded-full"
+            />
+        ))}
+        {/* Beacon Orb */}
+        <div className="relative w-6 h-6 bg-brand-primary/5 border border-brand-primary/20 rounded-full flex items-center justify-center">
+            <div className="w-2 h-2 bg-brand-primary rounded-full animate-pulse" />
+        </div>
+        {/* Satellite Ring */}
+        <motion.div
+            animate={{ rotateZ: 360, rotateX: 60 }}
+            transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+            className="absolute inset-[-6px] border border-brand-primary/10 border-dashed rounded-full"
+        />
+    </div>
+);
+
 /**
  * CELESTIAL BACKGROUND COMPONENTS
  */
@@ -348,27 +469,65 @@ const DriftingBodies = () => {
  * CORE & ORBITAL COMPONENTS
  */
 
-const CentralCore = () => (
+const SolarSystemCore = () => (
     <div className="relative w-40 h-40 md:w-56 md:h-56 flex items-center justify-center">
+        {/* Sun Glow */}
         <motion.div
             animate={{ scale: [0.95, 1.05, 0.95], opacity: [0.015, 0.04, 0.015] }}
             transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
             className="absolute inset-[-120%] bg-brand-primary/8 rounded-full blur-[100px] pointer-events-none"
         />
 
-        <div className="relative z-10 w-20 h-20 md:w-28 md:h-28 bg-white rounded-full shadow-[0_0_50px_rgba(var(--color-brand-primary-rgb),0.06)] border border-brand-primary/5 flex flex-col items-center justify-center gap-1.5 overflow-hidden group">
-            <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/[0.03] to-transparent" />
+        {/* Central Sun/Shield */}
+        <div className="relative z-10 w-20 h-20 md:w-28 md:h-28 flex items-center justify-center overflow-visible">
+            {/* Inner Shield (Old ActiveShield logic) */}
             <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 80, repeat: Infinity, ease: "linear" }}
-                className="absolute inset-0 opacity-[0.04]"
-                style={{ backgroundImage: 'conic-gradient(from 0deg, var(--color-brand-primary), transparent, var(--color-brand-primary))' }}
+                animate={{ rotate: 360 } as any}
+                transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                className="absolute inset-[-10px] border-[1.5px] border-dashed border-brand-primary/20 rounded-full"
             />
-            <div className="relative z-10 flex flex-col items-center gap-0.5">
-                <Icon name="server" size={28} className="text-brand-primary" />
-                <span className="text-[8px] font-black font-mono text-brand-primary tracking-[0.3em] uppercase">Core</span>
+            <motion.div
+                animate={{ rotate: -360 } as any}
+                transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
+                className="absolute inset-[-4px] border border-brand-primary/40 rounded-full"
+            />
+
+            {/* Main Sun Body */}
+            <div className="relative z-10 w-16 h-16 md:w-20 md:h-20 bg-white rounded-full shadow-[0_0_50px_rgba(var(--color-brand-primary-rgb),0.06)] border border-brand-primary/5 flex flex-col items-center justify-center gap-1.5 overflow-hidden group">
+                <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/[0.03] to-transparent" />
+                <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 80, repeat: Infinity, ease: "linear" }}
+                    className="absolute inset-0 opacity-[0.04]"
+                    style={{ backgroundImage: 'conic-gradient(from 0deg, var(--color-brand-primary), transparent, var(--color-brand-primary))' }}
+                />
+                <div className="relative z-10 flex flex-col items-center gap-0.5">
+                    <Icon name="sun" size={28} className="text-brand-primary" />
+                    <span className="text-[8px] font-black font-mono text-brand-primary tracking-[0.3em] uppercase">Sun</span>
+                </div>
             </div>
         </div>
+
+        {/* Micro-planets Orbits */}
+        {[
+            { radius: 60, speed: 10, offset: 0, size: 4 },
+            { radius: 85, speed: 15, offset: 120, size: 6 },
+            { radius: 110, speed: 20, offset: 240, size: 5 }
+        ].map((p, i) => (
+            <motion.div
+                key={i}
+                animate={{ rotate: 360 }}
+                transition={{ duration: p.speed, repeat: Infinity, ease: "linear" }}
+                className="absolute"
+                style={{ width: p.radius * 2, height: p.radius * 2 }}
+            >
+                <div
+                    className="absolute top-0 left-1/2 -translate-x-1/2 bg-brand-primary/10 border border-brand-primary/20 rounded-full shadow-[0_0_10px_rgba(var(--color-brand-primary-rgb),0.2)]"
+                    style={{ width: p.size, height: p.size }}
+                />
+                <div className="absolute inset-0 border border-brand-primary/[0.04] rounded-full pointer-events-none" />
+            </motion.div>
+        ))}
 
         {/* Orbit Lanes - Responsive scaling */}
         {[
@@ -561,7 +720,7 @@ export function PricingFinalCTA() {
             title: "Software & AI",
             value: "100% Type-Safe",
             detail: "MODERN_ENGINEERING",
-            graphic: <LogicFlow />,
+            graphic: <SoftwarePlanet />,
             orbit: {
                 id: 0,
                 radiusMobile: 140,
@@ -575,7 +734,7 @@ export function PricingFinalCTA() {
             title: "Cloud & Systems",
             value: "99.99% Uptime",
             detail: "HIGH_AVAILABILITY",
-            graphic: <SecureStack />,
+            graphic: <CloudPlanet />,
             orbit: {
                 id: 1,
                 radiusMobile: 210,
@@ -589,7 +748,7 @@ export function PricingFinalCTA() {
             title: "Networking",
             value: "<1ms Latency",
             detail: "FIBER_BACKBONE",
-            graphic: <GlobalMesh />,
+            graphic: <NetworkingPlanet />,
             orbit: {
                 id: 2,
                 radiusMobile: 280,
@@ -603,7 +762,7 @@ export function PricingFinalCTA() {
             title: "Tech Support",
             value: "24/7 Active",
             detail: "ON_SITE_STABILITY",
-            graphic: <ActiveShield />,
+            graphic: <SupportPlanet />,
             orbit: {
                 id: 3,
                 radiusMobile: 350,
@@ -624,7 +783,7 @@ export function PricingFinalCTA() {
             <motion.div style={{ opacity, scale }} className="relative z-10 w-full h-full flex items-center justify-center">
                 {/* Central Star */}
                 <div className="relative z-20">
-                    <CentralCore />
+                    <SolarSystemCore />
                 </div>
 
                 {/* Orbiting Planets */}

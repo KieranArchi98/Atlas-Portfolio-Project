@@ -12,8 +12,48 @@ interface Certification {
     tier: 'Platinum' | 'Gold' | 'Core';
 }
 
+const CardParticles = ({ color }: { color: string }) => {
+    return (
+        <div className="absolute inset-[-40px] pointer-events-none overflow-visible">
+            {[...Array(6)].map((_, i) => (
+                <motion.div
+                    key={i}
+                    initial={{
+                        x: Math.random() * 200 - 100,
+                        y: Math.random() * 200 - 100,
+                        opacity: 0,
+                        scale: 0
+                    }}
+                    animate={{
+                        x: [
+                            Math.random() * 200 - 100,
+                            Math.random() * 200 - 100,
+                            Math.random() * 200 - 100
+                        ],
+                        y: [
+                            Math.random() * 200 - 100,
+                            Math.random() * 200 - 100,
+                            Math.random() * 200 - 100
+                        ],
+                        opacity: [0, 0.4, 0],
+                        scale: [0, 1, 0],
+                    }}
+                    transition={{
+                        duration: 10 + Math.random() * 10,
+                        repeat: Infinity,
+                        ease: "linear",
+                        delay: i * 2
+                    }}
+                    className="absolute w-1 h-1 rounded-full"
+                    style={{ backgroundColor: color, filter: 'blur(1px)' }}
+                />
+            ))}
+        </div>
+    );
+};
+
 const CERTS: Certification[] = [
-    { name: "Comptia A+", issuer: "CompTIA", year: "2024", icon: "settings", color: "#6366f1", tier: 'Core' },
+    { name: "Comptia A+", issuer: "CompTIA", year: "2024", icon: "settings", color: "#ef4444", tier: 'Core' },
     { name: "Comptia Network+", issuer: "CompTIA", year: "2025", icon: "globe", color: "#10b981", tier: 'Gold' },
     { name: "CCNA", issuer: "Cisco", year: "2025", icon: "server", color: "#3b82f6", tier: 'Platinum' },
 ];
@@ -109,6 +149,9 @@ export function Certifications() {
                                         </h3>
                                         <div className="h-px w-4 bg-brand-primary opacity-0 group-hover:opacity-100 group-hover:w-8 transition-all duration-500 mt-1" />
                                     </div>
+
+                                    {/* Particle Effect */}
+                                    <CardParticles color={cert.color} />
 
                                     {/* Details Area - Reveals on Group Hover */}
                                     <div className="h-0 opacity-0 group-hover:h-12 group-hover:opacity-100 transition-all duration-500 overflow-hidden flex flex-col items-center">

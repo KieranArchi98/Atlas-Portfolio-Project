@@ -44,7 +44,7 @@ Blog ->
 - Devlopment Blogs - What I'm Doing & Learning
 - Release Notes - What's New
 
-Legal ->
+Legal -> 
 - Privacy Policy
 - Terms of Service
 - 404 Page

@@ -1,4 +1,5 @@
 
+import { HugeiconsIcon } from '@hugeicons/react';
 import {
     Home01Icon,
     Settings01Icon,
@@ -27,15 +28,20 @@ import {
     File01Icon,
     Download01Icon,
     PlayCircle02Icon,
-    ArrowLeft01Icon as ChevronLeftIcon,
-    ArrowRight01Icon as ChevronRightIcon,
+    ArrowLeft01Icon,
+    ArrowUp01Icon,
+    ArrowDown01Icon,
+    Sun01Icon,
+    Moon01Icon,
+    StarIcon,
+    Mail01Icon,
+    ChartIncreaseIcon,
     TwitterIcon,
-} from 'hugeicons-react';
+} from '@hugeicons/core-free-icons';
 
 /* 
   Mapping of icon names to components for easy string-based usage if needed, 
   or just export the wrapper to use with component directly.
-  For this system, we'll allow passing the Icon Component or a name if we maintain a registry.
 */
 
 export const ICONS = {
@@ -67,8 +73,15 @@ export const ICONS = {
     linkedin: Linkedin01Icon,
     server: Database01Icon, // Using Database icon for server context
     globe: Globe02Icon,
-    "chevron-left": ChevronLeftIcon,
-    "chevron-right": ChevronRightIcon,
+    "chevron-left": ArrowLeft01Icon,
+    "chevron-right": ArrowRight01Icon,
+    "chevron-up": ArrowUp01Icon,
+    "chevron-down": ArrowDown01Icon,
+    sun: Sun01Icon,
+    moon: Moon01Icon,
+    star: StarIcon,
+    mail: Mail01Icon,
+    "trending-up": ChartIncreaseIcon,
     twitter: TwitterIcon,
 };
 
@@ -76,7 +89,7 @@ export type IconName = keyof typeof ICONS;
 
 interface IconProps extends React.SVGProps<SVGSVGElement> {
     name?: IconName;
-    icon?: React.ElementType; // allow passing component directly
+    icon?: any; // allow passing icon data directly
     size?: number | string;
     color?: string;
     className?: string;
@@ -84,30 +97,31 @@ interface IconProps extends React.SVGProps<SVGSVGElement> {
 
 /**
  * atomic icon component
- * Wraps HugeIcons. Default size 24px (tokens say 20px in system, updating default).
+ * Wraps @hugeicons/react HugeiconsIcon.
  */
 export function Icon({
     name,
-    icon: IconComponent,
+    icon: iconData,
     size = 20,
     color = "currentColor",
     className = "",
     ...props
 }: IconProps) {
 
-    const Component = IconComponent || (name ? ICONS[name] : null);
+    const finalIcon = iconData || (name ? ICONS[name] : null);
 
-    if (!Component) {
+    if (!finalIcon) {
         console.warn(`Icon "${name}" not found and no component provided.`);
         return null;
     }
 
     return (
-        <Component
+        <HugeiconsIcon
+            icon={finalIcon}
             size={size}
             color={color}
             className={`inline-block align-middle ${className}`}
-            {...props}
+            {...(props as any)}
         />
     );
 }

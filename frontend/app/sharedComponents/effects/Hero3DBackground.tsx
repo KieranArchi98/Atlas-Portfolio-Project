@@ -24,7 +24,7 @@ function generateSpherePoints(count: number, radius: number) {
 
 // Particle Field Component
 function ParticleField(props: any) {
-  const ref = useRef<any>();
+  const ref = useRef<any>(null);
 
   // Generate random points in a sphere
   const sphere = useMemo(() => {

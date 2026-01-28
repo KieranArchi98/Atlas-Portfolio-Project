@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from 'framer-motion';
-import { ICONS, IconName } from './Icon';
+import { Icon, IconName } from './Icon';
 
 interface AnimatedRitualIconProps {
     name: IconName;
@@ -16,10 +16,6 @@ export function AnimatedRitualIcon({
     className = "",
     accentColor = "var(--color-brand-primary)"
 }: AnimatedRitualIconProps) {
-    const IconComponent = ICONS[name];
-
-    if (!IconComponent) return null;
-
     return (
         <motion.div
             initial="initial"
@@ -91,7 +87,8 @@ export function AnimatedRitualIcon({
                 }}
                 className="relative z-10 text-foreground-primary"
             >
-                <IconComponent
+                <Icon
+                    name={name}
                     size={size}
                     strokeWidth={1.5}
                 />

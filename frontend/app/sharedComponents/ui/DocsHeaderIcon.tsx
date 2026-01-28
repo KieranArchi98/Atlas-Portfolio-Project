@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from 'framer-motion';
-import { ICONS, IconName } from './Icon';
+import { Icon, IconName } from './Icon';
 
 interface DocsHeaderIconProps {
     name: IconName;
@@ -24,10 +24,6 @@ export function DocsHeaderIcon({
     className = "",
     accentColor = "var(--color-brand-primary)"
 }: DocsHeaderIconProps) {
-    const IconComponent = ICONS[name];
-
-    if (!IconComponent) return null;
-
     return (
         <motion.div
             initial={{ opacity: 0, y: 10 }}
@@ -55,7 +51,8 @@ export function DocsHeaderIcon({
                 }}
                 className="text-brand-primary"
             >
-                <IconComponent
+                <Icon
+                    name={name}
                     size={size}
                     strokeWidth={1.5}
                 />
